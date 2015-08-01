@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ExamUML">
+  <ClassDiagramComponents>
+    <Class name="Examen" package="" visibility="public" xPosition="10.0" yPosition="54.0">
+      <Fields>
+        <Field name="idExamen" type="int" visibility="public" isStatic="true"/>
+        <Field name="Nombre" type="String" visibility="public"/>
+        <Field name="IdTema" type="Object" visibility="public"/>
+        <Field name="Fecharegistro" type="Date" visibility="private"/>
+        <Field name="Usuario" type="Object" visibility="private"/>
+        <Field name="CantidadPregunta" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="CrearExamen" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Pregunta" package="" visibility="public" xPosition="10.0" yPosition="329.0">
+      <Fields>
+        <Field name="IdPregunta" type="int" visibility="private"/>
+        <Field name="Pregunta" type="String" visibility="private"/>
+        <Field name="idTipoPregunta" type="Object" visibility="private"/>
+        <Field name="IdExamen" type="Object" visibility="private"/>
+        <Field name="IdComplegidad" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="TipoPregunta" package="" visibility="public" xPosition="302.0" yPosition="356.0">
+      <Fields>
+        <Field name="IdTipoPregunta" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+        <Field name="FechaRegistro" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Tema" package="" visibility="public" xPosition="274.0" yPosition="12.0">
+      <Fields>
+        <Field name="IdTema" type="Int" visibility="public"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="FechaRegistro" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="TipoComplejidad" package="" visibility="public" xPosition="11.0" yPosition="626.0">
+      <Fields>
+        <Field name="IdTipoComplegidad" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Desripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Materia" package="" visibility="public" xPosition="562.0" yPosition="-9.0">
+      <Fields>
+        <Field name="IdMateria" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="274.0" yPosition="184.0">
+      <Methods>
+        <Method name="Crearpregunta" returnType="void" visibility="public"/>
+        <Method name="numpregunta" returnType="void" visibility="public"/>
+        <Method name="nivelcomplejidad" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="preguntas" source="Examen" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tema" source="Examen" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Tnt_Exam"/>
+    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="complejidad_pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tema_materia" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
