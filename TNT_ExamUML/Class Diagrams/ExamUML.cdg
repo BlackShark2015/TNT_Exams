@@ -63,7 +63,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="274.0" yPosition="184.0">
+    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="314.0" yPosition="185.0">
       <Methods>
         <Method name="Crearpregunta" returnType="void" visibility="public"/>
         <Method name="numpregunta" returnType="void" visibility="public"/>
@@ -72,11 +72,11 @@
     </Interface>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="preguntas" source="Examen" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tema" source="Examen" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Tnt_Exam"/>
-    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="complejidad_pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tema_materia" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Tnt_Exam"/>
+    <HasRelation name="complejidad_pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="preguntas" source="Examen" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
