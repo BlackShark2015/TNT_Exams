@@ -27,7 +27,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="TipoPregunta" package="" visibility="public" xPosition="302.0" yPosition="356.0">
+    <Class name="TipoPregunta" package="" visibility="public" xPosition="468.0" yPosition="493.0">
       <Fields>
         <Field name="IdTipoPregunta" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -55,15 +55,17 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Materia" package="" visibility="public" xPosition="562.0" yPosition="-9.0">
+    <Class name="Materia" package="" visibility="public" xPosition="569.0" yPosition="29.0">
       <Fields>
         <Field name="IdMateria" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="getIdMateria" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="314.0" yPosition="185.0">
+    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="487.0" yPosition="188.0">
       <Methods>
         <Method name="Crearpregunta" returnType="void" visibility="public"/>
         <Method name="numpregunta" returnType="void" visibility="public"/>
@@ -72,11 +74,11 @@
     </Interface>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="tema" source="Examen" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="tema_materia" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Tnt_Exam"/>
     <HasRelation name="complejidad_pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tema_materia" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="preguntas" source="Examen" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tema" source="Examen" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
