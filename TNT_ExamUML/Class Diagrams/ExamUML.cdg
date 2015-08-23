@@ -2,51 +2,51 @@
 
 <ClassDiagram name="ExamUML">
   <ClassDiagramComponents>
-    <Class name="Examen" package="" visibility="public" xPosition="10.0" yPosition="54.0">
+    <Class name="Examen" package="" visibility="public" xPosition="29.0" yPosition="101.0">
       <Fields>
-        <Field name="idExamen" type="int" visibility="public" isStatic="true"/>
-        <Field name="Nombre" type="String" visibility="public"/>
-        <Field name="IdTema" type="Object" visibility="public"/>
-        <Field name="Fecharegistro" type="Date" visibility="private"/>
-        <Field name="Usuario" type="Object" visibility="private"/>
-        <Field name="CantidadPregunta" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="public"/>
+        <Field name="cantidadPreguntas" type="int" visibility="public"/>
+        <Field name="fechaRegistro" type="Date" visibility="private"/>
+        <Field name="idUsuario" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
         <Method name="CrearExamen" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Pregunta" package="" visibility="public" xPosition="10.0" yPosition="329.0">
+    <Class name="Pregunta" package="" visibility="public" xPosition="274.0" yPosition="431.0">
       <Fields>
         <Field name="IdPregunta" type="int" visibility="private"/>
+        <Field name="idTema" type="int" visibility="private"/>
+        <Field name="idTipoPregunta" type="int" visibility="private"/>
+        <Field name="idComplegidad" type="int" visibility="private"/>
         <Field name="Pregunta" type="String" visibility="private"/>
-        <Field name="idTipoPregunta" type="Object" visibility="private"/>
-        <Field name="IdExamen" type="Object" visibility="private"/>
-        <Field name="IdComplegidad" type="Object" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="TipoPregunta" package="" visibility="public" xPosition="468.0" yPosition="493.0">
+    <Class name="TipoPregunta" package="" visibility="public" xPosition="591.0" yPosition="261.0">
       <Fields>
         <Field name="IdTipoPregunta" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
         <Field name="Descripcion" type="String" visibility="private"/>
-        <Field name="FechaRegistro" type="Date" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Tema" package="" visibility="public" xPosition="274.0" yPosition="12.0">
+    <Class name="Tema" package="" visibility="public" xPosition="274.0" yPosition="220.0">
       <Fields>
         <Field name="IdTema" type="Int" visibility="public"/>
         <Field name="Nombre" type="String" visibility="private"/>
-        <Field name="FechaRegistro" type="Date" visibility="private"/>
+        <Field name="idMateria" type="Int" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="TipoComplejidad" package="" visibility="public" xPosition="11.0" yPosition="626.0">
+    <Class name="TipoComplejidad" package="" visibility="public" xPosition="274.0" yPosition="693.0">
       <Fields>
         <Field name="IdTipoComplegidad" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -55,7 +55,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Materia" package="" visibility="public" xPosition="569.0" yPosition="29.0">
+    <Class name="Materia" package="" visibility="public" xPosition="274.0" yPosition="23.0">
       <Fields>
         <Field name="IdMateria" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -65,20 +65,44 @@
         <Method name="getIdMateria" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="487.0" yPosition="188.0">
+    <Interface name="Tnt_Exam" package="" visibility="public" xPosition="663.0" yPosition="34.0">
       <Methods>
         <Method name="Crearpregunta" returnType="void" visibility="public"/>
         <Method name="numpregunta" returnType="void" visibility="public"/>
         <Method name="nivelcomplejidad" returnType="void" visibility="public"/>
       </Methods>
     </Interface>
+    <Class name="DescripcionExamen" package="" visibility="public" xPosition="12.0" yPosition="431.0">
+      <Fields>
+        <Field name="idDescripcionExamen" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="cantidadPreguntaTema" type="int" visibility="private"/>
+        <Field name="PorcentagePRegunta" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Respuesta" package="" visibility="public" xPosition="591.0" yPosition="441.0">
+      <Fields>
+        <Field name="idRespuesta" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="respuesta" type="String" visibility="private"/>
+        <Field name="correcta" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="type_pregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Tnt_Exam"/>
+    <HasRelation name="materiaTema" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="temaPreg" source="Tema" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="pregResp" source="Pregunta" target="Respuesta" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="descExamPregunta" source="DescripcionExamen" target="Pregunta" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="examDescrt" source="Examen" target="DescripcionExamen" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="complejidad_pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="tema_materia" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="preguntas" source="Examen" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="tema" source="Examen" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="pregTipoPregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
