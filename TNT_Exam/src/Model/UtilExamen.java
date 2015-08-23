@@ -1,4 +1,4 @@
-package tnt_exam;
+package Model;
 
 public abstract class UtilExamen {
 

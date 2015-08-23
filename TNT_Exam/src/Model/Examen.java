@@ -1,4 +1,4 @@
-package tnt_exam;
+package Model;
 
 
 import java.util.Date;
