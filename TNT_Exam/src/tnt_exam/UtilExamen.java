@@ -1,3 +1,5 @@
+package tnt_exam;
+
 public abstract class UtilExamen {
 
     public DescripcionExamen generarExamen(DescripcionExamen item) {

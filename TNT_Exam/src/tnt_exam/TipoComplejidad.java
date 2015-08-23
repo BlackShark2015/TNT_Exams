@@ -1,3 +1,5 @@
+package tnt_exam;
+
 public class TipoComplejidad {
 
     private int idTipoComplegidad;

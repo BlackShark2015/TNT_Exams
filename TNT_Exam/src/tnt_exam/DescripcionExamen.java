@@ -1,3 +1,5 @@
+package tnt_exam;
+
 public class DescripcionExamen extends UtilExamen {
 
     private int idDescripcionExamen;

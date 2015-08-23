@@ -1,3 +1,5 @@
+package tnt_exam;
+
 public class Respuesta {
 
     private int idRespuesta;

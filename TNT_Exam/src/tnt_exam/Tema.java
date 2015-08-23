@@ -1,17 +1,15 @@
+package tnt_exam;
+
 
 import java.util.ArrayList;
 
-public class Pregunta implements Util {
+public class Tema implements Util {
 
-    private int IdPregunta;
+    private int IdTema;
 
-    private int idTema;
+    public String Nombre;
 
-    private int idTipoPregunta;
-
-    private int idComplegidad;
-
-    public String Pregunta;
+    private int idMateria;
 
     @Override
     public ArrayList crear(ArrayList item) {
