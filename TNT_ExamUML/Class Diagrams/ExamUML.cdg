@@ -36,21 +36,21 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="crear" returnType="int" visibility="public">
-          <Argument type="arrayList" name="item"/>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
         </Method>
       </Methods>
     </Class>
     <Class name="Tema" package="" visibility="public" xPosition="632.0" yPosition="210.0">
       <Fields>
-        <Field name="IdTema" type="Int" visibility="private"/>
+        <Field name="IdTema" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="public"/>
-        <Field name="idMateria" type="Int" visibility="private"/>
+        <Field name="idMateria" type="int" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="crear" returnType="int" visibility="public">
-          <Argument type="arrayList" name="item"/>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
         </Method>
       </Methods>
     </Class>
@@ -88,18 +88,11 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="crearRespuesta" returnType="int" visibility="public">
+        <Method name="crearRespuesta" returnType="Respuesta" visibility="public">
           <Argument type="Respuesta" name="item"/>
         </Method>
       </Methods>
     </Class>
-    <Enum name="TipoComplejidad" package="" visibility="public" xPosition="768.0" yPosition="687.0">
-      <Literals>
-        <Literal name="int idTipoComplegidad"/>
-        <Literal name="String Nombre"/>
-        <Literal name="String Descripcion"/>
-      </Literals>
-    </Enum>
     <Class name="UtilExamen" package="" visibility="public" isAbstract="true" xPosition="146.0" yPosition="17.0">
       <Fields/>
       <Constructors/>
@@ -117,30 +110,39 @@
     </Class>
     <Interface name="Util" package="" visibility="public" xPosition="1099.0" yPosition="25.0">
       <Methods>
-        <Method name="crear" returnType="void" visibility="public">
-          <Argument type="arrayList" name="item"/>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
         </Method>
-        <Method name="actualizar" returnType="void" visibility="public">
-          <Argument type="arrayList" name="item"/>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
         </Method>
-        <Method name="consultar" returnType="void" visibility="public">
+        <Method name="consultar" returnType="int" visibility="public">
           <Argument type="int" name="idItem"/>
         </Method>
       </Methods>
     </Interface>
+    <Class name="TipoComplejidad" package="" visibility="public" xPosition="768.0" yPosition="688.0">
+      <Fields>
+        <Field name="idTipoComplegidad" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="materiaTema" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Tema" target="Util"/>
+    <HasRelation name="pregTipoPregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="descExamPregunta" source="DescripcionExamen" target="Pregunta" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
     <HasRelation name="temaPreg" source="Tema" target="Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Materia" target="Util"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Util"/>
-    <HasRelation name="pregResp" source="Pregunta" target="Respuesta" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
-    <HasRelation name="descExamPregunta" source="DescripcionExamen" target="Pregunta" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
     <IsRelation name="is" source="DescripcionExamen" target="UtilExamen"/>
-    <HasRelation name="examDescrt" source="Examen" target="DescripcionExamen" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Pregunta" target="Util"/>
     <IsRelation name="is" source="Examen" target="UtilExamen"/>
-    <HasRelation name="pregTipoPregunta" source="Pregunta" target="TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="complegidad_Pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="examDescrt" source="Examen" target="DescripcionExamen" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Tema" target="Util"/>
+    <HasRelation name="Complegidad_Pregunta" source="Pregunta" target="TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="materiaTema" source="Materia" target="Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="pregResp" source="Pregunta" target="Respuesta" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
   </ClassDiagramRelations>
 </ClassDiagram>
