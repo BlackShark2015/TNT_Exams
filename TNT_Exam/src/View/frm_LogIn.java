@@ -5,17 +5,26 @@
  */
 package View;
 
+import Controller.Conectadb;
+
 /**
  *
  * @author jcmorales
  */
 public class frm_LogIn extends javax.swing.JFrame {
 
+    private Conectadb Con;
+
+    public void inicializar(){
+        this.Con = new Conectadb();
+    }
+    
     /**
      * Creates new form frm_LogIn
      */
     public frm_LogIn() {
         initComponents();
+        inicializar();
     }
 
     /**

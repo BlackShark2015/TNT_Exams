@@ -15,8 +15,7 @@ import java.sql.Statement;
  */
 public class Conectadb
 {
- 
- 
+    
 //variables miembro
  
     private String usuario;
@@ -42,7 +41,7 @@ public class Conectadb
         //poner los datos apropiados
         this.usuario = "root";
         this.clave = "123456aA$";
-        this.url = "jdbc:mysql://localhost:3306/tnt_exam";
+        this.url = "jdbc:mysql://localhost:3306/TNT_Exam";
         this.driverClassName = "com.mysql.jdbc.Driver";
     }
  

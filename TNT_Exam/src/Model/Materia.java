@@ -9,9 +9,7 @@ public class Materia implements Util {
 
     private String Nombre;
 
-    public void getIdMateria() {
-    }
-
+    
     @Override
     public ArrayList crear(ArrayList item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -26,4 +24,22 @@ public class Materia implements Util {
     public int consultar(int idItem) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public int getIdMateria() {
+        return IdMateria;
+    }
+
+    public void setIdMateria(int IdMateria) {
+        this.IdMateria = IdMateria;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+    
+    
 }

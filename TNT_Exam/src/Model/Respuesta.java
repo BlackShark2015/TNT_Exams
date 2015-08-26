@@ -13,4 +13,22 @@ public class Respuesta {
     public Respuesta crearRespuesta(Respuesta item) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public int getIdRespuesta() {
+        return idRespuesta;
+    }
+
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
+    }
+
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
+    }
+    
+    
 }

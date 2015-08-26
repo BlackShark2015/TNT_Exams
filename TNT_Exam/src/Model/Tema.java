@@ -7,7 +7,7 @@ public class Tema implements Util {
 
     private int IdTema;
 
-    public String Nombre;
+    private String Nombre;
 
     private int idMateria;
 
@@ -25,4 +25,29 @@ public class Tema implements Util {
     public int consultar(int idItem) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public int getIdTema() {
+        return IdTema;
+    }
+
+    public void setIdTema(int IdTema) {
+        this.IdTema = IdTema;
+    }
+
+    public int getIdMateria() {
+        return idMateria;
+    }
+
+    public void setIdMateria(int idMateria) {
+        this.idMateria = idMateria;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+    
 }
