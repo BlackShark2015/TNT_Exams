@@ -6,10 +6,21 @@ import java.util.ArrayList;
 public class TipoPregunta {
 
     private int IdTipoPregunta;
-
+    private static TipoPregunta insTipPregunta= null;
     private String Nombre;
 
     private String Descripcion;
+    
+    protected TipoPregunta() {
+    }
+    public static TipoPregunta getIntance()
+    {
+        if(insTipPregunta == null)
+        {
+            insTipPregunta = new TipoPregunta();
+        }
+        return insTipPregunta;
+    }
 
     public ArrayList crear(ArrayList item) {
         throw new UnsupportedOperationException("Not supported yet.");
