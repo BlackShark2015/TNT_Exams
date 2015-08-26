@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Model">
   <ClassDiagramComponents>
-    <Class name="DescripcionExamen" package="Model" visibility="public" xPosition="20.0" yPosition="20.0">
+    <Class name="DescripcionExamen" package="Model" visibility="public" xPosition="333.0" yPosition="39.0">
       <Fields>
         <Field name="idDescripcionExamen" type="int" visibility="private"/>
         <Field name="idExamen" type="int" visibility="private"/>
@@ -32,7 +32,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Examen" package="Model" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="Examen" package="Model" visibility="public" xPosition="21.0" yPosition="20.0">
       <Fields>
         <Field name="nombre" type="String" visibility="private"/>
         <Field name="cantidadPreguntas" type="int" visibility="public"/>
@@ -66,7 +66,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Materia" package="Model" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="Materia" package="Model" visibility="public" xPosition="474.0" yPosition="593.0">
       <Fields>
         <Field name="IdMateria" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -92,7 +92,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Pregunta" package="Model" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="Pregunta" package="Model" visibility="public" xPosition="800.0" yPosition="20.0">
       <Fields>
         <Field name="IdPregunta" type="int" visibility="private"/>
         <Field name="idTema" type="int" visibility="private"/>
@@ -129,7 +129,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Respuesta" package="Model" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="Respuesta" package="Model" visibility="public" xPosition="1541.0" yPosition="20.0">
       <Fields>
         <Field name="idRespuesta" type="int" visibility="private"/>
         <Field name="idPregunta" type="int" visibility="private"/>
@@ -151,7 +151,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Tema" package="Model" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="Tema" package="Model" visibility="public" xPosition="1122.0" yPosition="565.0">
       <Fields>
         <Field name="IdTema" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -182,7 +182,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="TipoComplejidad" package="Model" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="TipoComplejidad" package="Model" visibility="public" xPosition="1541.0" yPosition="318.0">
       <Fields>
         <Field name="idTipoComplegidad" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -204,7 +204,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="TipoPregunta" package="Model" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="TipoPregunta" package="Model" visibility="public" xPosition="1541.0" yPosition="604.0">
       <Fields>
         <Field name="IdTipoPregunta" type="int" visibility="private"/>
         <Field name="Nombre" type="String" visibility="private"/>
@@ -229,20 +229,7 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="Util" package="Model" visibility="public" xPosition="20.0" yPosition="420.0">
-      <Methods>
-        <Method name="crear" returnType="ArrayList" visibility="public">
-          <Argument type="ArrayList" name="item"/>
-        </Method>
-        <Method name="actualizar" returnType="ArrayList" visibility="public">
-          <Argument type="ArrayList" name="item"/>
-        </Method>
-        <Method name="consultar" returnType="int" visibility="public">
-          <Argument type="int" name="idItem"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Class name="UtilExamen" package="Model" visibility="public" isAbstract="true" xPosition="320.0" yPosition="420.0">
+    <Class name="UtilExamen" package="Model" visibility="public" isAbstract="true" xPosition="21.0" yPosition="527.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -257,14 +244,33 @@
         </Method>
       </Methods>
     </Class>
+    <Interface name="Util" package="Model" visibility="public" xPosition="826.0" yPosition="527.0">
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Interface>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <HasRelation name="pregTipoComple" source="Model.Pregunta" target="Model.TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.UtilExamen" target="Model.Examen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="examDescExam" source="Model.Examen" target="Model.DescripcionExamen" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.DescripcionExamen" target="Model.UtilExamen"/>
+    <HasRelation name="temaPregunta" source="Model.Tema" target="Model.Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <IsRelation name="is" source="Model.Examen" target="Model.UtilExamen"/>
+    <HasRelation name="preg_Tipo_Pregunta" source="Model.Pregunta" target="Model.TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="materiaTema" source="Model.Materia" target="Model.Tema" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <HasRelation name="pregResp" source="Model.Pregunta" target="Model.Respuesta" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Pregunta" target="Model.Util"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Tema" target="Model.Util"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Materia" target="Model.Util"/>
-    <UseRelation source="Model.UtilExamen" target="Model.Examen" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="Model.Examen" target="Model.UtilExamen"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Pregunta" target="Model.Util"/>
-    <IsRelation name="is" source="Model.DescripcionExamen" target="Model.UtilExamen"/>
-    <UseRelation source="Model.Respuesta" target="Model.Respuesta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="descExamPregunta" source="Model.DescripcionExamen" target="Model.Pregunta" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
   </ClassDiagramRelations>
 </ClassDiagram>
