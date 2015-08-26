@@ -1,6 +1,14 @@
 package Model;
 
-public abstract class UtilExamen {
+/**
+ * 
+ * @author jcmorales
+ * Clase encargada de BUILDER para examen
+ * el objetivo de esta clase es generar un examen, almacenarlo en base de datos
+ * y consultarlo en el momento requerido por el usuario
+ */
+public abstract class UtilExamen 
+{
 
     public DescripcionExamen generarExamen(DescripcionExamen item) {
         throw new UnsupportedOperationException("Not supported yet.");
