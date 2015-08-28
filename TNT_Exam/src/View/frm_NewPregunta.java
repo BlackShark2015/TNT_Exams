@@ -5,6 +5,10 @@
  */
 package View;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Familia
@@ -41,6 +45,15 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        Parametri = new javax.swing.JMenu();
+        CrearUsuario = new javax.swing.JMenuItem();
+        CrearMateria = new javax.swing.JMenuItem();
+        CrearTema = new javax.swing.JMenuItem();
+        CrearPregunta = new javax.swing.JMenuItem();
+        Exam = new javax.swing.JMenu();
+        CrearExamen = new javax.swing.JMenuItem();
+        ConsultarExamen = new javax.swing.JMenuItem();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +106,64 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        Parametri.setText("Parametrizacion");
+
+        CrearUsuario.setText("Crear Usuario");
+        CrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearUsuarioActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearUsuario);
+
+        CrearMateria.setText("Crear Materia");
+        CrearMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearMateriaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearMateria);
+
+        CrearTema.setText("Crear Tema");
+        CrearTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearTemaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearTema);
+
+        CrearPregunta.setText("Crear Pregunta");
+        CrearPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearPreguntaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearPregunta);
+
+        jMenuBar1.add(Parametri);
+
+        Exam.setText("Examen");
+
+        CrearExamen.setText("Crear Examen");
+        CrearExamen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearExamenActionPerformed(evt);
+            }
+        });
+        Exam.add(CrearExamen);
+
+        ConsultarExamen.setText("Consultar Examen");
+        ConsultarExamen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarExamenActionPerformed(evt);
+            }
+        });
+        Exam.add(ConsultarExamen);
+
+        jMenuBar1.add(Exam);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,16 +177,15 @@ public class frm_NewPregunta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(28, 28, 28))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(45, 45, 45))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,7 +222,7 @@ public class frm_NewPregunta extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,6 +231,47 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearUsuarioActionPerformed
+        frm_NewUsuario pc = null;
+        try {
+            pc = new frm_NewUsuario();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearUsuarioActionPerformed
+
+    private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
+        frm_NewMateria pc = new frm_NewMateria();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearMateriaActionPerformed
+
+    private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
+        frm_NewTema pc = new frm_NewTema();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearTemaActionPerformed
+
+    private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
+        frm_NewPregunta pc = new frm_NewPregunta();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearPreguntaActionPerformed
+
+    private void CrearExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearExamenActionPerformed
+        frm_NewExamen pc = new frm_NewExamen();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearExamenActionPerformed
+
+    private void ConsultarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarExamenActionPerformed
+        frm_Consultar pc = new frm_Consultar();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ConsultarExamenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +309,14 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ConsultarExamen;
+    private javax.swing.JMenuItem CrearExamen;
+    private javax.swing.JMenuItem CrearMateria;
+    private javax.swing.JMenuItem CrearPregunta;
+    private javax.swing.JMenuItem CrearTema;
+    private javax.swing.JMenuItem CrearUsuario;
+    private javax.swing.JMenu Exam;
+    private javax.swing.JMenu Parametri;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -207,6 +326,7 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

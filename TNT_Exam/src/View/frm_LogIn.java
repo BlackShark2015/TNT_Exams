@@ -6,6 +6,7 @@
 package View;
 
 import Controller.Conectadb;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -121,13 +122,14 @@ public class frm_LogIn extends javax.swing.JFrame {
             char[] convertpast = new char[passw.length()];
                 for (int i=0; i<passw.length(); i++)
                     convertpast[i] = passw.charAt(i);
-
                 if (Arrays.equals(txt_Password.getPassword(),convertpast) && user.toUpperCase().equals(name.toUpperCase())) {
                     JOptionPane.showMessageDialog(null,"Binvenido " + name);
+                    ftm_Principal pc = new ftm_Principal();
+                    pc.setVisible(true);
+                    dispose();
                 }else{
                     JOptionPane.showMessageDialog(null,"verifique los datos proporsionados");
-            }
-            
+            }            
         } else {
             JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
         }

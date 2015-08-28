@@ -5,17 +5,30 @@
  */
 package View;
 
+import Controller.Conectadb;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jcmorales
  */
 public class frm_NewUsuario extends javax.swing.JFrame {
 
+    private Conectadb Con;
+
+    public void inicializar() throws IOException{
+        this.Con = new Conectadb();
+    }
     /**
      * Creates new form frm_NewUsuario
      */
-    public frm_NewUsuario() {
+    public frm_NewUsuario() throws IOException {
         initComponents();
+        inicializar();
     }
 
     /**
@@ -35,15 +48,24 @@ public class frm_NewUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txt_Ident = new javax.swing.JTextField();
+        txt_Nombre = new javax.swing.JTextField();
+        txt_Email = new javax.swing.JTextField();
+        txt_UserName = new javax.swing.JTextField();
+        txt_FechaNacimiento = new javax.swing.JTextField();
+        txt_Perfil = new javax.swing.JTextField();
+        txt_Pass = new javax.swing.JPasswordField();
+        txt_ConfirmPass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        Parametri = new javax.swing.JMenu();
+        CrearUsuario = new javax.swing.JMenuItem();
+        CrearMateria = new javax.swing.JMenuItem();
+        CrearTema = new javax.swing.JMenuItem();
+        CrearPregunta = new javax.swing.JMenuItem();
+        Exam = new javax.swing.JMenu();
+        CrearExamen = new javax.swing.JMenuItem();
+        ConsultarExamen = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +86,69 @@ public class frm_NewUsuario extends javax.swing.JFrame {
         jLabel8.setText("Perfil:");
 
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        Parametri.setText("Parametrizacion");
+
+        CrearUsuario.setText("Crear Usuario");
+        CrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearUsuarioActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearUsuario);
+
+        CrearMateria.setText("Crear Materia");
+        CrearMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearMateriaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearMateria);
+
+        CrearTema.setText("Crear Tema");
+        CrearTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearTemaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearTema);
+
+        CrearPregunta.setText("Crear Pregunta");
+        CrearPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearPreguntaActionPerformed(evt);
+            }
+        });
+        Parametri.add(CrearPregunta);
+
+        jMenuBar1.add(Parametri);
+
+        Exam.setText("Examen");
+
+        CrearExamen.setText("Crear Examen");
+        CrearExamen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearExamenActionPerformed(evt);
+            }
+        });
+        Exam.add(CrearExamen);
+
+        ConsultarExamen.setText("Consultar Examen");
+        ConsultarExamen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultarExamenActionPerformed(evt);
+            }
+        });
+        Exam.add(ConsultarExamen);
+
+        jMenuBar1.add(Exam);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,23 +172,23 @@ public class frm_NewUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txt_FechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                    .addComponent(jPasswordField1)
-                                    .addComponent(jPasswordField2))))))
+                                    .addComponent(txt_Nombre)
+                                    .addComponent(txt_Email)
+                                    .addComponent(txt_UserName)
+                                    .addComponent(txt_Ident, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                    .addComponent(txt_Pass)
+                                    .addComponent(txt_ConfirmPass))))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_Email, txt_FechaNacimiento, txt_Ident, txt_Nombre, txt_Perfil, txt_UserName});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,41 +198,95 @@ public class frm_NewUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Ident, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_ConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_FechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearUsuarioActionPerformed
+        frm_NewUsuario pc = null;
+        try {
+            pc = new frm_NewUsuario();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearUsuarioActionPerformed
+
+    private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
+        frm_NewMateria pc = new frm_NewMateria();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearMateriaActionPerformed
+
+    private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
+        frm_NewTema pc = new frm_NewTema();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearTemaActionPerformed
+
+    private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
+        frm_NewPregunta pc = new frm_NewPregunta();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearPreguntaActionPerformed
+
+    private void CrearExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearExamenActionPerformed
+        frm_NewExamen pc = new frm_NewExamen();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CrearExamenActionPerformed
+
+    private void ConsultarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarExamenActionPerformed
+        frm_Consultar pc = new frm_Consultar();
+        pc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ConsultarExamenActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String Query = "Insert Into tnt_exam.usuarios(identificacion, Nombre, Email, Password, FechaNacimiento, UserName, idPerfil)" +
+                        "values ('"+txt_Ident.getText()+"', '"+txt_Nombre.getText()+"', '"+txt_Email.getText()+"','"+txt_Pass.getPassword()+"',now(), '"+txt_UserName.getText()+"',1)";
+        try {
+            int insert = Con.insertar(Query);
+            if(insert >=0)
+                JOptionPane.showMessageDialog(this, "Usuario Registrado.");
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error, No se registro el usurio.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,12 +318,24 @@ public class frm_NewUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_NewUsuario().setVisible(true);
+                try {
+                    new frm_NewUsuario().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ConsultarExamen;
+    private javax.swing.JMenuItem CrearExamen;
+    private javax.swing.JMenuItem CrearMateria;
+    private javax.swing.JMenuItem CrearPregunta;
+    private javax.swing.JMenuItem CrearTema;
+    private javax.swing.JMenuItem CrearUsuario;
+    private javax.swing.JMenu Exam;
+    private javax.swing.JMenu Parametri;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -194,13 +345,14 @@ public class frm_NewUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPasswordField txt_ConfirmPass;
+    private javax.swing.JTextField txt_Email;
+    private javax.swing.JTextField txt_FechaNacimiento;
+    private javax.swing.JTextField txt_Ident;
+    private javax.swing.JTextField txt_Nombre;
+    private javax.swing.JPasswordField txt_Pass;
+    private javax.swing.JTextField txt_Perfil;
+    private javax.swing.JTextField txt_UserName;
     // End of variables declaration//GEN-END:variables
 }
