@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 package Controller;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  *
  * @author Familia
  */
 public class Conectadb
 {
-    
-//variables miembro
+    //variables miembro
  
     private String usuario;
     private String clave;
@@ -37,11 +44,19 @@ public class Conectadb
  
     //Constructor que crea la conexion sin parametros con unos definidos en la clase
     //(meter los datos correspondientes)
-    public Conectadb() {
-        //poner los datos apropiados
-        this.usuario = "root";
-        this.clave = "123456aA$";
-        this.url = "jdbc:mysql://localhost:3306/TNT_Exam";
+    public Conectadb() throws FileNotFoundException, IOException {
+        Properties propiedades = new Properties();
+        InputStream entrada = null;
+        
+        entrada = new FileInputStream("configuracion.properties");
+
+        // cargamos el archivo de propiedades
+        propiedades.load(entrada);
+
+        // obtenemos las propiedades y las asignamos a sus respectivas variables
+        this.usuario = propiedades.getProperty("Usuario");
+        this.clave = propiedades.getProperty("Clave");
+        this.url = "jdbc:mysql://localhost:3306/" + propiedades.getProperty("DataBase");
         this.driverClassName = "com.mysql.jdbc.Driver";
     }
  
@@ -89,14 +104,16 @@ public class Conectadb
  
 //la conexion propiamente dicha
  
-    public void conectar() throws SQLException {
+    public boolean conectar() throws SQLException {
         try {
             Class.forName(this.driverClassName).newInstance();
             this.conn = DriverManager.getConnection(this.url, this.usuario, this.clave);
- 
-        } catch (Exception err) {
+            return true;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException err) {
             System.out.println("Error " + err.getMessage());
+            return false;
         }
+        
     }
     //Cerrar la conexion
  

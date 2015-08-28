@@ -6,6 +6,13 @@
 package View;
 
 import Controller.Conectadb;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,14 +22,14 @@ public class frm_LogIn extends javax.swing.JFrame {
 
     private Conectadb Con;
 
-    public void inicializar(){
+    public void inicializar() throws IOException{
         this.Con = new Conectadb();
     }
     
     /**
      * Creates new form frm_LogIn
      */
-    public frm_LogIn() {
+    public frm_LogIn() throws IOException {
         initComponents();
         inicializar();
     }
@@ -38,8 +45,8 @@ public class frm_LogIn extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txt_User = new javax.swing.JTextField();
+        txt_Password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,9 +55,9 @@ public class frm_LogIn extends javax.swing.JFrame {
 
         jLabel2.setText("Password:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_UserActionPerformed(evt);
             }
         });
 
@@ -75,8 +82,8 @@ public class frm_LogIn extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_Password)
+                            .addComponent(txt_User, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,11 +92,11 @@ public class frm_LogIn extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -99,12 +106,40 @@ public class frm_LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {char [] vac= {};
+        String user  = txt_User.getText();
+        char[] pass = txt_Password.getPassword();
+        if (user.equals("")){
+            JOptionPane.showMessageDialog(null, "Usuario invalido.", "Campos nulos", 0);
+        }else if (Arrays.equals(pass, vac)){
+            JOptionPane.showMessageDialog(null, "Contraseña invalida.", "Campos nulos", 0);
+        }else if(this.Con.conectar()) {
+            ResultSet rsIdentificar = Con.consulta("select * from usuarios");
+            rsIdentificar.next();
+            String name = rsIdentificar.getString("UserName");
+            String passw = rsIdentificar.getString("Password");
+            char[] convertpast = new char[passw.length()];
+                for (int i=0; i<passw.length(); i++)
+                    convertpast[i] = passw.charAt(i);
+
+                if (Arrays.equals(txt_Password.getPassword(),convertpast) && user.toUpperCase().equals(name.toUpperCase())) {
+                    JOptionPane.showMessageDialog(null,"Binvenido " + name);
+                }else{
+                    JOptionPane.showMessageDialog(null,"verifique los datos proporsionados");
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
+        }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_UserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_UserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,7 +171,11 @@ public class frm_LogIn extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_LogIn().setVisible(true);
+                try {
+                    new frm_LogIn().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(frm_LogIn.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -145,7 +184,7 @@ public class frm_LogIn extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txt_Password;
+    private javax.swing.JTextField txt_User;
     // End of variables declaration//GEN-END:variables
 }
