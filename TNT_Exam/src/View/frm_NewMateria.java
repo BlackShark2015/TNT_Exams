@@ -5,7 +5,6 @@
  */
 package View;
 
-import Controller.Conectadb;
 import Controller.MateriaController;
 import Model.Materia;
 import java.io.IOException;
@@ -172,7 +171,12 @@ public class frm_NewMateria extends javax.swing.JFrame {
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
         try {
-            frm_NewTema pc = new frm_NewTema();
+            frm_NewTema pc = null;
+            try {
+                pc = new frm_NewTema();
+            } catch (SQLException ex) {
+                Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+            }
             pc.setVisible(true);
             dispose();
         } catch (IOException ex) {
