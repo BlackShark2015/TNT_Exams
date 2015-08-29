@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Clase que controla la creacion de un nuevo tema y lo inserta en base de datos
+ * 
  */
 package Controller;
 
@@ -16,20 +15,34 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jcmorales
+ * @author jcmorales,jgarciac3
  */
 public class TemaController {
     private Conectadb Con;
     private Tema tem;
-    
+   /**
+    * 
+    * inicializacion para conexion con base de datos
+    */
     public void inicializar() throws IOException{
         this.Con = new Conectadb();
         this.tem = new Tema();
     }
+    /**
+     * 
+     * constructor que invoca a inicializar para formalizar la conexion con base
+     * de datos
+     */
     public TemaController() throws IOException {
         inicializar();
     }
-    
+    /**
+     * 
+     * @param Nombre
+     * @param idMateria
+     * @return  valor entero con el cual validar si la creacion se realizo 
+     *          correctamente
+     */
     public int CrearMaterial(String Nombre, int idMateria){
         tem.setNombre(Nombre);
         tem.setIdMateria(idMateria);

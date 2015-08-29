@@ -1,8 +1,13 @@
+/**
+ * clase que describe Materia
+ */
 package Model;
 
-
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Familia
+ */
 public class Materia implements Util {
 
     private int IdMateria;

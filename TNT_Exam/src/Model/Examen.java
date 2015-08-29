@@ -1,8 +1,15 @@
+/**
+ * Esta clase se compone de descripcion de examen la cual le asigna
+ * las preguntas correspondientes
+ */
 package Model;
 
 
 import java.util.Date;
-
+/**
+ * 
+ * @author Familia
+ */
 public class Examen extends UtilExamen {
 
     private String nombre;

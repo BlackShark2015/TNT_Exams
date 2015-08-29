@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Clase encargada de gestionar conexion con base de datos con respecto a
+ * las materias
  */
 package Controller;
 
@@ -17,18 +16,34 @@ import java.util.logging.Logger;
  *
  * @author jcmorales
  */
+
 public final class MateriaController {
     private Conectadb Con;
     private Materia mat;
-
+    /**
+     * 
+     * @throws IOException 
+     * funcion para realizar conexion con base de datos
+     */
     public void inicializar() throws IOException{
         this.Con = new Conectadb();
         this.mat = new Materia();
     }
+    /**
+     * 
+     * @throws IOException 
+     * constructor que invoca inicializar para formalizar la conexion con 
+     * la base de datos
+     */
     public MateriaController() throws IOException {
         inicializar();
     }
             
+    /**
+     * 
+     * @param Nombre
+     * @return valor que indica si la creacion en base de datos fue exitosa
+     */
     public int CrearMaterial(String Nombre){
         mat.setNombre(Nombre);
         int insert =0;
@@ -49,7 +64,11 @@ public final class MateriaController {
         }
         return insert;
     }
-    
+    /**
+     * 
+     * @return  consulta a base de datos que retonar todas las materias 
+     * existentes en base de datos
+     */
     public ResultSet ObtenerMateria(){
         ResultSet rsMateria = null;
         try {

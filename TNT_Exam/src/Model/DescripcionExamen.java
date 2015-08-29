@@ -1,5 +1,14 @@
+/**
+ * esta clase agrupa la descripcion de un examen teniendo en cuenta
+ * la materia, los temas y preguntas 
+ * luego es adicionada al examen para su generacion.
+ */
 package Model;
 
+/**
+ * 
+ * @author Familia
+ */
 public class DescripcionExamen extends UtilExamen {
 
     private int idDescripcionExamen;
