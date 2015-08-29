@@ -6,6 +6,7 @@
 package View;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -259,6 +260,8 @@ public class frm_NewPregunta extends javax.swing.JFrame {
             pc.setVisible(true);
             dispose();
         } catch (IOException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CrearTemaActionPerformed

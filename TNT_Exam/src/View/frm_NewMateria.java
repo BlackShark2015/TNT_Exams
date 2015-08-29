@@ -177,6 +177,8 @@ public class frm_NewMateria extends javax.swing.JFrame {
             dispose();
         } catch (IOException ex) {
             Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CrearTemaActionPerformed
 
