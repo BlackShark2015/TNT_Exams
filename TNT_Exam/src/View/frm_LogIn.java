@@ -107,33 +107,37 @@ public class frm_LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {char [] vac= {};
-        String user  = txt_User.getText();
-        char[] pass = txt_Password.getPassword();
-        if (user.equals("")){
-            JOptionPane.showMessageDialog(null, "Usuario invalido.", "Campos nulos", 0);
-        }else if (Arrays.equals(pass, vac)){
-            JOptionPane.showMessageDialog(null, "Contraseña invalida.", "Campos nulos", 0);
-        }else if(this.Con.conectar()) {
-            ResultSet rsIdentificar = Con.consulta("select * from usuarios");
-            rsIdentificar.next();
-            String name = rsIdentificar.getString("UserName");
-            String passw = rsIdentificar.getString("Password");
-            char[] convertpast = new char[passw.length()];
-                for (int i=0; i<passw.length(); i++)
+        try {
+            
+
+            char[] vac = {};
+            String user = txt_User.getText();
+            char[] pass = txt_Password.getPassword();
+            if (user.equals("")) {
+                JOptionPane.showMessageDialog(null, "Usuario invalido.", "Campos nulos", 0);
+            } else if (Arrays.equals(pass, vac)) {
+                JOptionPane.showMessageDialog(null, "Contraseña invalida.", "Campos nulos", 0);
+            } else if (this.Con.conectar()) {
+                ResultSet rsIdentificar = Con.consulta("select * from usuarios");
+                rsIdentificar.next();
+                String name = rsIdentificar.getString("UserName");
+                String passw = rsIdentificar.getString("Password");
+                char[] convertpast = new char[passw.length()];
+                for (int i = 0; i < passw.length(); i++) {
                     convertpast[i] = passw.charAt(i);
-                if (Arrays.equals(txt_Password.getPassword(),convertpast) && user.toUpperCase().equals(name.toUpperCase())) {
-                    JOptionPane.showMessageDialog(null,"Binvenido " + name);
+                }
+                if (Arrays.equals(txt_Password.getPassword(), convertpast) && user.toUpperCase().equals(name.toUpperCase())) {
+                    JOptionPane.showMessageDialog(null, "Binvenido " + name);
                     ftm_Principal pc = new ftm_Principal();
                     pc.setVisible(true);
                     dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null,"verifique los datos proporsionados");
-            }            
-        } else {
-            JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
-        }
-            
+                } else {
+                    JOptionPane.showMessageDialog(null, "verifique los datos proporsionados");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(frm_LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }

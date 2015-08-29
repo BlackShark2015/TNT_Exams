@@ -7,7 +7,9 @@ package View;
 
 import Controller.Conectadb;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -155,10 +157,9 @@ public class frm_NewUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
@@ -182,7 +183,10 @@ public class frm_NewUsuario extends javax.swing.JFrame {
                                     .addComponent(txt_UserName)
                                     .addComponent(txt_Ident, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                                     .addComponent(txt_Pass)
-                                    .addComponent(txt_ConfirmPass))))))
+                                    .addComponent(txt_ConfirmPass)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -276,16 +280,26 @@ public class frm_NewUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultarExamenActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String Query = "Insert Into tnt_exam.usuarios(identificacion, Nombre, Email, Password, FechaNacimiento, UserName, idPerfil)" +
-                        "values ('"+txt_Ident.getText()+"', '"+txt_Nombre.getText()+"', '"+txt_Email.getText()+"','"+txt_Pass.getPassword()+"',now(), '"+txt_UserName.getText()+"',1)";
-        try {
-            int insert = Con.insertar(Query);
-            if(insert >=0)
-                JOptionPane.showMessageDialog(this, "Usuario Registrado.");
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error, No se registro el usurio.");
-        }
+        char[] pass = txt_Pass.getPassword();
+        char[] cpass = txt_ConfirmPass.getPassword();
+        
+        if(Arrays.equals(pass, cpass)){
+            String Query = "Insert Into tnt_exam.usuarios(identificacion, Nombre, Email, Password, FechaNacimiento, UserName, idPerfil)" +
+                           "values ('"+txt_Ident.getText()+"', '"+txt_Nombre.getText()+"', '"+txt_Email.getText()+"','"+new String(txt_Pass.getPassword())+"',now(), '"+txt_UserName.getText()+"',1)";
+            try {
+                if (this.Con.conectar()) {
+                    int insert = Con.insertar(Query);
+                    if(insert >=0)
+                        JOptionPane.showMessageDialog(this, "Usuario Registrado.");
+                    Con.cierraConexion();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error, No se registro el usurio.");
+            }
+        }else{JOptionPane.showMessageDialog(this, "Confirmacion de la contraseña no correcta.");}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
