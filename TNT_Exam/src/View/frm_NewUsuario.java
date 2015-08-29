@@ -250,15 +250,25 @@ public class frm_NewUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearUsuarioActionPerformed
 
     private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
-        frm_NewMateria pc = new frm_NewMateria();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewMateria pc = new frm_NewMateria();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearMateriaActionPerformed
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
-        frm_NewTema pc = new frm_NewTema();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewTema pc = new frm_NewTema();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed

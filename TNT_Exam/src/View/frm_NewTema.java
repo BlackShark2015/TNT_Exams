@@ -5,21 +5,47 @@
  */
 package View;
 
+import Controller.Conectadb;
+import Controller.MateriaController;
+import Controller.TemaController;
+import Model.Tema;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Familia
  */
-public class frm_NewTema extends javax.swing.JFrame {
+public final class frm_NewTema extends javax.swing.JFrame {
 
     /**
      * Creates new form frm_NewTema
      */
-    public frm_NewTema() {
+        
+    private TemaController temaC;
+    private MateriaController matC;
+
+    public void inicializar() throws IOException, SQLException{
+        this.temaC = new TemaController();
+        this.matC = new MateriaController();
+        DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
+        modelcbox.addElement("Seleccione...");
+        jComboBox1.setModel(modelcbox);
+        ResultSet rs = matC.ObtenerMateria();
+            modelcbox.addElement(rs.getObject("Nombre"));
+            jComboBox1.setModel(modelcbox);
+            while (rs.next()) {
+                modelcbox.addElement(rs.getObject("Nombre"));
+                jComboBox1.setModel(modelcbox);
+            }
+    }
+    public frm_NewTema() throws IOException, SQLException {
         initComponents();
+        inicializar();
     }
 
     /**
@@ -170,7 +196,7 @@ public class frm_NewTema extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearUsuarioActionPerformed
@@ -184,15 +210,28 @@ public class frm_NewTema extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearUsuarioActionPerformed
 
     private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
-        frm_NewMateria pc = new frm_NewMateria();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewMateria pc = new frm_NewMateria();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearMateriaActionPerformed
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
-        frm_NewTema pc = new frm_NewTema();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewTema pc = null;
+            try {
+                pc = new frm_NewTema();
+            } catch (SQLException ex) {
+                Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
@@ -243,7 +282,13 @@ public class frm_NewTema extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_NewTema().setVisible(true);
+                try {
+                    new frm_NewTema().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

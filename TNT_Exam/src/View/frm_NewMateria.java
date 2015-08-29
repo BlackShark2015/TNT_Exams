@@ -5,9 +5,14 @@
  */
 package View;
 
+import Controller.Conectadb;
+import Controller.MateriaController;
+import Model.Materia;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +23,8 @@ public class frm_NewMateria extends javax.swing.JFrame {
     /**
      * Creates new form frm_NewMateria
      */
-    public frm_NewMateria() {
+    
+    public frm_NewMateria() throws IOException {
         initComponents();
     }
 
@@ -33,7 +39,7 @@ public class frm_NewMateria extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Material = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         Parametri = new javax.swing.JMenu();
         CrearUsuario = new javax.swing.JMenuItem();
@@ -49,6 +55,11 @@ public class frm_NewMateria extends javax.swing.JFrame {
         jLabel1.setText("Materia");
 
         jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         Parametri.setText("Parametrizacion");
 
@@ -119,7 +130,7 @@ public class frm_NewMateria extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_Material, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
@@ -128,7 +139,7 @@ public class frm_NewMateria extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Material, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -149,15 +160,24 @@ public class frm_NewMateria extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearUsuarioActionPerformed
 
     private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
-        frm_NewMateria pc = new frm_NewMateria();
+        frm_NewMateria pc = null;
+        try {
+            pc = new frm_NewMateria();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_CrearMateriaActionPerformed
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
-        frm_NewTema pc = new frm_NewTema();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewTema pc = new frm_NewTema();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
@@ -177,6 +197,27 @@ public class frm_NewMateria extends javax.swing.JFrame {
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_ConsultarExamenActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Materia mat = new Materia(); 
+        MateriaController mc;
+        try {
+            mc = new MateriaController();
+            mat.setNombre(txt_Material.getText());
+        
+        if(txt_Material.getText().length() == 0)
+            JOptionPane.showMessageDialog(this, "El campo materia es obligatorio.");
+        else{
+            int result = mc.CrearMaterial(mat.getNombre());
+            if(result > 0)
+                JOptionPane.showMessageDialog(this, "Materira Registrada.");
+            else if(result == -1)
+                JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
+        }
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +249,11 @@ public class frm_NewMateria extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_NewMateria().setVisible(true);
+                try {
+                    new frm_NewMateria().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -225,6 +270,6 @@ public class frm_NewMateria extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_Material;
     // End of variables declaration//GEN-END:variables
 }

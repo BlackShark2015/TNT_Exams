@@ -6,6 +6,7 @@
 package View;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -133,13 +134,24 @@ public class ftm_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearUsuarioActionPerformed
 
     private void CrearMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearMateriaActionPerformed
-        frm_NewMateria pc = new frm_NewMateria();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewMateria pc = new frm_NewMateria();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(ftm_Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearMateriaActionPerformed
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
-        frm_NewTema pc = new frm_NewTema();
+        frm_NewTema pc = null;
+        try {
+            pc = new frm_NewTema();
+        } catch (IOException ex) {
+            Logger.getLogger(ftm_Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ftm_Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_CrearTemaActionPerformed
