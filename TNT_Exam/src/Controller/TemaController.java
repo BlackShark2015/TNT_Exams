@@ -43,13 +43,13 @@ public class TemaController {
      * @return  valor entero con el cual validar si la creacion se realizo 
      *          correctamente
      */
-    public int CrearMaterial(String Nombre, int idMateria){
+    public int CrearTema(String Nombre, int idMateria){
         tem.setNombre(Nombre);
         tem.setIdMateria(idMateria);
         
         int insert =0;
-        String Query = "Insert Into tnt_exam.Tema(Nombre, idMateria)" +
-                       "values ('"+ tem.getNombre() + "'" + tem.getIdMateria() + ")";
+        String Query = "Insert Into tnt_exam.Temas(Nombre, Materias_idMateria)" +
+                       "values ('"+ tem.getNombre() + "'," + tem.getIdMateria() + ")";
         try {
             if (this.Con.conectar()) {
                 insert = Con.insertar(Query);

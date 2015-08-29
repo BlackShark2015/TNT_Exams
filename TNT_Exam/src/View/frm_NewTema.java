@@ -8,6 +8,7 @@ package View;
 import Controller.Conectadb;
 import Controller.MateriaController;
 import Controller.TemaController;
+import Model.Materia;
 import Model.Tema;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,13 +35,13 @@ public final class frm_NewTema extends javax.swing.JFrame {
         this.temaC = new TemaController();
         this.matC = new MateriaController();
         DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
-        modelcbox.addElement("Seleccione...");
+        modelcbox.addElement(new Item(1, "Seleccione..."));
         jComboBox1.setModel(modelcbox);
         ResultSet rs = matC.ObtenerMateria();
-            modelcbox.addElement(rs.getObject("Nombre"));
+            modelcbox.addElement(new Item((int) rs.getObject("IdMateria"), (String) rs.getObject("Nombre")));
             jComboBox1.setModel(modelcbox);
             while (rs.next()) {
-                modelcbox.addElement(rs.getObject("Nombre"));
+                modelcbox.addElement(new Item((int) rs.getObject("IdMateria"), (String) rs.getObject("Nombre")));
                 jComboBox1.setModel(modelcbox);
             }
     }
@@ -60,7 +62,7 @@ public final class frm_NewTema extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_Tema = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Parametri = new javax.swing.JMenu();
@@ -80,9 +82,9 @@ public final class frm_NewTema extends javax.swing.JFrame {
 
         jLabel2.setText("Tema");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_Tema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_TemaActionPerformed(evt);
             }
         });
 
@@ -165,7 +167,7 @@ public final class frm_NewTema extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_Tema, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +184,7 @@ public final class frm_NewTema extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Tema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -191,12 +193,24 @@ public final class frm_NewTema extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_TemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TemaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_TemaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
+        Tema tem = new Tema(); 
+        
+        if(txt_Tema.getText().length() == 0 || jComboBox1.getSelectedIndex() == 0)
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorio.");
+        else{
+            tem.setNombre(txt_Tema.getText());
+            tem.setIdMateria(jComboBox1.getSelectedIndex());
+            int result = temaC.CrearTema(tem.getNombre(), tem.getIdMateria());
+            if(result > 0)
+                JOptionPane.showMessageDialog(this, "Tema Registrado.");
+            else if(result == -1)
+                JOptionPane.showMessageDialog(this, "Valide la conexion a la Base de Datos.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearUsuarioActionPerformed
@@ -307,6 +321,6 @@ public final class frm_NewTema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_Tema;
     // End of variables declaration//GEN-END:variables
 }
