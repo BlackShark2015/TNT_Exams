@@ -1,6 +1,8 @@
 /**
  * clase que se encarga de las conexiones a la base de datos
+ * 
  */
+
 package Controller;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -17,7 +19,8 @@ import java.util.Properties;
 
 /**
  *
- * @author Familia
+ * @author Julio Morales, Johan Garcia
+ * Clase base para crear conexion con base de datos
  */
 public class Conectadb
 {

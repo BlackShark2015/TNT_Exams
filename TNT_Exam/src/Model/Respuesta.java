@@ -1,5 +1,9 @@
 package Model;
-
+/**
+ * 
+ * @author Julio Morales, Johan Garcia
+ * clase que describe Respuesta
+ */
 public class Respuesta {
 
     private int idRespuesta;

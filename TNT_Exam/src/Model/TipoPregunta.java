@@ -2,7 +2,12 @@ package Model;
 
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Julio Morales, Johan Garcia
+ * clase que describe si una pregunta es de tipo abierta, seleccion multiple
+ * entre otras
+ */
 public class TipoPregunta {
 
     private int IdTipoPregunta;

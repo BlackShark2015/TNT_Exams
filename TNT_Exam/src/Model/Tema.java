@@ -3,6 +3,12 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Julio Morales, Johan Garcia
+ * clase que describe un tema al cual pertenece una pregunta
+ */
+
 public class Tema implements Util {
 
     private int IdTema;
