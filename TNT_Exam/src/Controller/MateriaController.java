@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jcmorales
+ * @author julio morales,Johan Garcia
  */
 
 public final class MateriaController {

@@ -1,5 +1,9 @@
 package Model;
-
+/**
+ * 
+ * @author Julio Morales, Johan Garcia
+ * clase que describe el tipo de complejidad de una pregunta
+ */
 public class TipoComplejidad {
 
     private int idTipoComplegidad;
