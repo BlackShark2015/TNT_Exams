@@ -1,56 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Cliente_Servidor;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-//import sockets.conexion.Conexion;
-import View.*;
-
-public class Servidor extends Conexion //Se hereda de conexión para hacer uso de los sockets y demás
-{
-    public Servidor() throws IOException{super("servidor");} //Se usa el constructor para servidor de Conexion
-
-    public void startServer()//Método para iniciar el servidor
-    {
-        ftm_Principal prp =  new ftm_Principal();
-        try
-        {
-            System.out.println("Esperando..."); //Esperando conexión
-
-            cs = ss.accept(); //Accept comienza el socket y espera una conexión desde un cliente
-
-            System.out.println("Cliente en línea");
-
-            //Se obtiene el flujo de salida del cliente para enviarle mensajes
-            salidaCliente = new DataOutputStream(cs.getOutputStream());
+import java.io.*;
+import java.net.*;
+import java.util.logging.*;
+import java.util.*;
+public class Servidor extends Thread {
+    private Socket socket;
+    private DataOutputStream dos;
+    private DataInputStream dis;
+    private int idSessio;
+    private Date fecTime = new Date();
+    public Servidor(Socket socket, int id) {
+        this.socket = socket;
+        this.idSessio = id;
+        try {
+            dos = new DataOutputStream(socket.getOutputStream());
+            dis = new DataInputStream(socket.getInputStream());
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void desconnectar() {
+        try {
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public void run() {
+        String accion = "";
+        try {
+            accion = dis.readUTF();
+            if(accion.equals("conexion establecida")){
+                System.out.println("El cliente con idSesion "+this.idSessio+" se ha conectado"+"-"+fecTime.getDate()+"--"+ fecTime.getHours()+":"+fecTime.getMinutes()+ "------"+fecTime);
+                dos.writeUTF("adios");
+          //  System.out.println();
             
-            //Se le envía un mensaje al cliente usando su flujo de salida
-            salidaCliente.writeUTF("Petición recibida y aceptada");
-            
-            //Se obtiene el flujo entrante desde el cliente
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
-            
-            while((mensajeServidor = entrada.readLine()) != null) //Mientras haya mensajes desde el cliente
-            {
-                prp.setVisible(true);
-                
-                //Se muestra por pantalla el mensaje recibido
-                System.out.println(mensajeServidor);
             }
-            
-            System.out.println("Fin de la conexión");
-            
-            ss.close();//Se finaliza la conexión con el cliente
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+        desconnectar();
     }
 }
