@@ -212,9 +212,13 @@ public class frm_Consultar extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
-        frm_NewPregunta pc = new frm_NewPregunta();
-        pc.setVisible(true);
-        dispose();
+        try {
+            frm_NewPregunta pc = new frm_NewPregunta();
+            pc.setVisible(true);
+            dispose();
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(frm_Consultar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CrearPreguntaActionPerformed
 
     private void CrearExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearExamenActionPerformed

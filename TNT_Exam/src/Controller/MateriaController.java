@@ -84,5 +84,22 @@ public final class MateriaController {
             Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rsMateria;
-    } 
+    }
+    
+        public int ObtenerMateria(String Materia) throws SQLException{
+        ResultSet rsMateria = null;
+        try {
+            if (this.Con.conectar()) {
+                rsMateria = Con.consulta("select * from materias where Nombre = '" + Materia + "'");
+                rsMateria.next();
+                
+                if(rsMateria.getRow() > 0)
+                    return (int) rsMateria.getObject("IdMateria");
+                Con.cierraConexion();
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return (int) rsMateria.getObject("IdMateria");
+    }
 }

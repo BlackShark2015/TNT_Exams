@@ -249,7 +249,14 @@ public final class frm_NewTema extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
-        frm_NewPregunta pc = new frm_NewPregunta();
+        frm_NewPregunta pc = null;
+        try {
+            pc = new frm_NewPregunta();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_CrearPreguntaActionPerformed

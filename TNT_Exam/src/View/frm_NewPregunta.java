@@ -5,23 +5,57 @@
  */
 package View;
 
+import Controller.ComplejidadController;
+import Controller.MateriaController;
+import Controller.TemaController;
+import Controller.TipoPreguntaController;
+import Model.Pregunta;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Familia
  */
-public class frm_NewPregunta extends javax.swing.JFrame {
-
+public final class frm_NewPregunta extends javax.swing.JFrame {
+    private Pregunta prmodel; 
+    private MateriaController matC;
+    private TemaController temaC;
+    private TipoPreguntaController tipoP;
+    private ComplejidadController compC;
+    
+    public void inicializar() throws IOException, SQLException{
+        this.matC = new MateriaController();
+        DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
+        modelcbox.addElement(new Item(1, "Seleccione..."));
+        jcmbMateria.setModel(modelcbox);
+        ResultSet rs = matC.ObtenerMateria();
+            modelcbox.addElement(new Item((int) rs.getObject("IdMateria"), (String) rs.getObject("Nombre")));
+            jcmbMateria.setModel(modelcbox);
+            while (rs.next()) {
+                modelcbox.addElement(new Item((int) rs.getObject("IdMateria"), (String) rs.getObject("Nombre")));
+                jcmbMateria.setModel(modelcbox);
+            }
+    }
     /**
      * Creates new form frm_NewPregunta
+     * @throws java.io.IOException
+     * @throws java.sql.SQLException
      */
-    public frm_NewPregunta() {
+    public frm_NewPregunta() throws IOException, SQLException {
         initComponents();
+        inicializar();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,17 +69,20 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcmbMateria = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        jcmbTema = new javax.swing.JComboBox();
+        jcmbTipoPregunta = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
+        jcmbComplejidad = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtxtPregunta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jtblPreguntas = new javax.swing.JTable();
+        Btn_Add = new javax.swing.JButton();
+        Btn_Guardar = new javax.swing.JButton();
+        Btn_Remove = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Parametri = new javax.swing.JMenu();
         CrearUsuario = new javax.swing.JMenuItem();
@@ -73,20 +110,41 @@ public class frm_NewPregunta extends javax.swing.JFrame {
 
         jLabel1.setText("Materia");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmbMateriaItemStateChanged(evt);
+            }
+        });
+        jcmbMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbMateriaActionPerformed(evt);
+            }
+        });
+        jcmbMateria.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcmbMateriaPropertyChange(evt);
+            }
+        });
 
         jLabel2.setText("Tema");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbTemaActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbTipoPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbTipoPreguntaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Tipo Pregunta");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        jcmbComplejidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                jcmbComplejidadActionPerformed(evt);
             }
         });
 
@@ -94,18 +152,44 @@ public class frm_NewPregunta extends javax.swing.JFrame {
 
         jLabel5.setText("Pregunta :");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jtblPreguntas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Materia", "Tema", "Tip. Pregunta", "Comp. Pregunta", "Pregunta"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jtblPreguntas);
+
+        Btn_Add.setText("Add Pregunta");
+        Btn_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_AddActionPerformed(evt);
+            }
+        });
+
+        Btn_Guardar.setLabel("Guardar");
+        Btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_GuardarActionPerformed(evt);
+            }
+        });
+
+        Btn_Remove.setText("Remover Pregunta");
+        Btn_Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_RemoveActionPerformed(evt);
+            }
+        });
 
         Parametri.setText("Parametrizacion");
 
@@ -169,34 +253,38 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(20, 20, 20))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jcmbMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jcmbTema, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jcmbTipoPregunta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jcmbComplejidad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(10, 10, 10))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(Btn_Add)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Btn_Remove))
+                                    .addComponent(jtxtPregunta)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_Guardar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,34 +292,40 @@ public class frm_NewPregunta extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcmbMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcmbTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcmbTipoPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcmbComplejidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_Add)
+                    .addComponent(Btn_Remove))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Btn_Guardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void jcmbComplejidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbComplejidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_jcmbComplejidadActionPerformed
 
     private void CrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearUsuarioActionPerformed
         frm_NewUsuario pc = null;
@@ -267,7 +361,14 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearTemaActionPerformed
 
     private void CrearPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPreguntaActionPerformed
-        frm_NewPregunta pc = new frm_NewPregunta();
+        frm_NewPregunta pc = null;
+        try {
+            pc = new frm_NewPregunta();
+        } catch (IOException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_CrearPreguntaActionPerformed
@@ -283,6 +384,146 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         pc.setVisible(true);
         dispose();
     }//GEN-LAST:event_ConsultarExamenActionPerformed
+
+    private void jcmbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbMateriaActionPerformed
+        try {
+            this.temaC = new TemaController();
+
+            DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
+            modelcbox.addElement(new Item(1, "Seleccione..."));
+            jcmbTema.setModel(modelcbox);
+            
+            Object item1 = jcmbMateria.getSelectedItem();
+            int value = ((Item)jcmbMateria.getSelectedItem()).getId();
+            
+            ResultSet rs = temaC.ObtenerTema(((Item)jcmbMateria.getSelectedItem()).getId());
+            modelcbox.addElement(new Item((int) rs.getObject("IdTema"), (String) rs.getObject("Nombre")));
+            jcmbTema.setModel(modelcbox);
+            while (rs.next()) {
+                modelcbox.addElement(new Item((int) rs.getObject("IdTema"), (String) rs.getObject("Nombre")));
+                jcmbTema.setModel(modelcbox);
+            }
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcmbMateriaActionPerformed
+
+    private void jcmbTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbTemaActionPerformed
+        try {
+            this.tipoP = new TipoPreguntaController();
+
+            DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
+            modelcbox.addElement(new Item(1, "Seleccione..."));
+            jcmbTipoPregunta.setModel(modelcbox);
+            
+            Object item1 = jcmbTipoPregunta.getSelectedItem();
+            int value = ((Item)jcmbTipoPregunta.getSelectedItem()).getId();
+            
+            ResultSet rs = tipoP.ObtenerTipoPregunta();
+            modelcbox.addElement(new Item((int) rs.getObject("idTipoPreguntas"), (String) rs.getObject("Nombre")));
+            jcmbTipoPregunta.setModel(modelcbox);
+            while (rs.next()) {
+                modelcbox.addElement(new Item((int) rs.getObject("idTipoPreguntas"), (String) rs.getObject("Nombre")));
+                jcmbTipoPregunta.setModel(modelcbox);
+            }
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcmbTemaActionPerformed
+
+    private void jcmbMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbMateriaItemStateChanged
+        
+    }//GEN-LAST:event_jcmbMateriaItemStateChanged
+
+    private void jcmbMateriaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcmbMateriaPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmbMateriaPropertyChange
+
+    private void jcmbTipoPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbTipoPreguntaActionPerformed
+        try {
+            this.compC = new ComplejidadController();
+
+            DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
+            modelcbox.addElement(new Item(1, "Seleccione..."));
+            jcmbComplejidad.setModel(modelcbox);
+            
+            Object item1 = jcmbComplejidad.getSelectedItem();
+            int value = ((Item)jcmbComplejidad.getSelectedItem()).getId();
+            
+            ResultSet rs = compC.ConsultarComplejidad();
+            modelcbox.addElement(new Item((int) rs.getObject("idComplejidad"), (String) rs.getObject("Nombre")));
+            jcmbComplejidad.setModel(modelcbox);
+            while (rs.next()) {
+                modelcbox.addElement(new Item((int) rs.getObject("idComplejidad"), (String) rs.getObject("Nombre")));
+                jcmbComplejidad.setModel(modelcbox);
+            }
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcmbTipoPreguntaActionPerformed
+
+    private void Btn_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_AddActionPerformed
+        //Por medio de un vector se agrega una fila nueva al modelo
+        //Primero extraemos el modelo y lo asignamos a una variable de tipo Table Model
+        DefaultTableModel model = (DefaultTableModel) jtblPreguntas.getModel();
+        
+        //Creamos el vector (fila) y agregamos todos los campos requeridos para el modelo
+        Vector row = new Vector();
+        row.add(((Item)jcmbMateria.getSelectedItem()).getName());
+        row.add(((Item)jcmbTema.getSelectedItem()).getName());
+        row.add(((Item)jcmbTipoPregunta.getSelectedItem()).getName());
+        row.add(((Item)jcmbComplejidad.getSelectedItem()).getName());
+        row.add(jtxtPregunta.getText());
+        
+        //Finalmente agregamos el vector a la tabla
+        model.addRow(row);
+    }//GEN-LAST:event_Btn_AddActionPerformed
+ArrayList<String> full_datos = new ArrayList<String>();  //  @jve:decl-index=0:
+	
+    private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
+        Vector datosGuardar=new Vector(1);	
+        DefaultTableModel model = (DefaultTableModel) jtblPreguntas.getModel();
+        Pregunta preg = null;
+        if(jtblPreguntas.getRowCount() > 0){
+            for (int i = 0; i < jtblPreguntas.getRowCount(); i++) //recorro las filas
+            {
+                /*for (int a = 0; a < jtblPreguntas.getColumnCount(); a++) //recorro las columnas
+                {
+                    full_datos.add(model.getValueAt(i, a).toString());
+                    datosGuardar.addElement(model.getValueAt(i, a).toString());
+                }*/
+                
+                try {
+                    int s = temaC.ObtenerTema(model.getValueAt(i, 1).toString());
+                    prmodel.setIdTema(s);
+                    prmodel.setIdTipoPregunta(tipoP.ObtenerTipoPregunta(model.getValueAt(i, 2).toString()));
+                    prmodel.setIdComplegidad(compC.ObtenerComplegidad(model.getValueAt(i, 3).toString()));
+                    prmodel.setPregunta(model.getValueAt(i, 4).toString());
+                    prmodel.crear();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                prmodel.crear(datosGuardar);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No existen preguntas a agregar en la base de datos.");
+        }
+    }//GEN-LAST:event_Btn_GuardarActionPerformed
+
+    private void Btn_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_RemoveActionPerformed
+        // TODO add your handling code here:
+        //Se valida que exista una fila seleccionada en la tabla
+        if(jtblPreguntas.getSelectedRow() >=0){
+            //se carga el modelo de la tabla en una variable teble model
+                DefaultTableModel model = (DefaultTableModel)jtblPreguntas.getModel();
+            //se elimina el elemento seleccionado
+                model.removeRow(jtblPreguntas.getSelectedRow());
+        } else {
+            //en caso de que se de clic en el boton remover y no tengan una fila seleccionada, se arroja una alerta
+                JOptionPane.showMessageDialog(Btn_Remove, "Seleccione al menos un item a remover.");
+        }
+    }//GEN-LAST:event_Btn_RemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,12 +555,21 @@ public class frm_NewPregunta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_NewPregunta().setVisible(true);
+                try {
+                    new frm_NewPregunta().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Add;
+    private javax.swing.JButton Btn_Guardar;
+    private javax.swing.JButton Btn_Remove;
     private javax.swing.JMenuItem ConsultarExamen;
     private javax.swing.JMenuItem CrearExamen;
     private javax.swing.JMenuItem CrearMateria;
@@ -328,10 +578,6 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     private javax.swing.JMenuItem CrearUsuario;
     private javax.swing.JMenu Exam;
     private javax.swing.JMenu Parametri;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -341,7 +587,11 @@ public class frm_NewPregunta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox jcmbComplejidad;
+    private javax.swing.JComboBox jcmbMateria;
+    private javax.swing.JComboBox jcmbTema;
+    private javax.swing.JComboBox jcmbTipoPregunta;
+    private javax.swing.JTable jtblPreguntas;
+    private javax.swing.JTextField jtxtPregunta;
     // End of variables declaration//GEN-END:variables
 }
