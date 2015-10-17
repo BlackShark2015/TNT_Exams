@@ -53,7 +53,7 @@ public class TipoPreguntaController {
                 rsTipPreg.next();
                 
                 if(rsTipPreg.getRow() > 0)
-                    return (int) rsTipPreg.getObject("IdTipoPreguntas");
+                    return (int) rsTipPreg.getObject("idTipoPreguntas");
                 Con.cierraConexion();
             } 
         } catch (SQLException ex) {

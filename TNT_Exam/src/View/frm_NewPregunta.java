@@ -7,6 +7,7 @@ package View;
 
 import Controller.ComplejidadController;
 import Controller.MateriaController;
+import Controller.PreguntaController;
 import Controller.TemaController;
 import Controller.TipoPreguntaController;
 import Model.Pregunta;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,12 +26,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Familia
  */
-public final class frm_NewPregunta extends javax.swing.JFrame {
+public class frm_NewPregunta extends javax.swing.JFrame {
     private Pregunta prmodel; 
     private MateriaController matC;
     private TemaController temaC;
     private TipoPreguntaController tipoP;
     private ComplejidadController compC;
+    private PreguntaController pregC;
     
     public void inicializar() throws IOException, SQLException{
         this.matC = new MateriaController();
@@ -390,7 +391,7 @@ public final class frm_NewPregunta extends javax.swing.JFrame {
             this.temaC = new TemaController();
 
             DefaultComboBoxModel modelcbox = new DefaultComboBoxModel();
-            modelcbox.addElement(new Item(1, "Seleccione..."));
+            modelcbox.addElement(new Item(0, "Seleccione..."));
             jcmbTema.setModel(modelcbox);
             
             Object item1 = jcmbMateria.getSelectedItem();
@@ -478,34 +479,47 @@ public final class frm_NewPregunta extends javax.swing.JFrame {
         //Finalmente agregamos el vector a la tabla
         model.addRow(row);
     }//GEN-LAST:event_Btn_AddActionPerformed
-ArrayList<String> full_datos = new ArrayList<String>();  //  @jve:decl-index=0:
-	
+
     private void Btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_GuardarActionPerformed
-        Vector datosGuardar=new Vector(1);	
+        String result = "";
+        int retorno;
+        //Creamos objeto model de tipo tabla para recorrre la tablajaba 
         DefaultTableModel model = (DefaultTableModel) jtblPreguntas.getModel();
-        Pregunta preg = null;
+        //Se crea un objeto con instancia de pregunta
+        Pregunta preg = new Pregunta();
+        // Instancia el modelo pregunta
+        prmodel = new Pregunta();
+        //Validamos que la tabla tenga datos asociados si no posee datos genera una alerta
         if(jtblPreguntas.getRowCount() > 0){
+            //Recorremos la tabla  obteniendo los datos fila por fila y los almacenamos en la base de datos        
             for (int i = 0; i < jtblPreguntas.getRowCount(); i++) //recorro las filas
             {
-                /*for (int a = 0; a < jtblPreguntas.getColumnCount(); a++) //recorro las columnas
-                {
-                    full_datos.add(model.getValueAt(i, a).toString());
-                    datosGuardar.addElement(model.getValueAt(i, a).toString());
-                }*/
-                
                 try {
-                    int s = temaC.ObtenerTema(model.getValueAt(i, 1).toString());
-                    prmodel.setIdTema(s);
-                    prmodel.setIdTipoPregunta(tipoP.ObtenerTipoPregunta(model.getValueAt(i, 2).toString()));
-                    prmodel.setIdComplegidad(compC.ObtenerComplegidad(model.getValueAt(i, 3).toString()));
-                    prmodel.setPregunta(model.getValueAt(i, 4).toString());
-                    prmodel.crear();
                     
-                } catch (SQLException ex) {
+                    pregC = new PreguntaController();
+                    
+                    preg.setIdTema(temaC.ObtenerTema(model.getValueAt(i, 1).toString()));
+                    preg.setIdMateria(matC.ObtenerMateria(model.getValueAt(i, 0).toString()));
+                    preg.setIdTipoPregunta(tipoP.ObtenerTipoPregunta(model.getValueAt(i, 2).toString()));
+                    preg.setIdComplegidad(compC.ObtenerComplegidad(model.getValueAt(i, 3).toString()));
+                    preg.setPregunta(model.getValueAt(i, 4).toString());
+                    
+                    retorno = pregC.CrearPregunta(preg);
+                    if(retorno == 0)
+                        JOptionPane.showMessageDialog(this, "Error con el controlador del modelo.");
+                    else if(retorno == -1)
+                        JOptionPane.showMessageDialog(this, "Error intentando acceder a la base de datos.");
+                    else 
+                    {
+                        result = result + "se agrega exitosamente la pregunta " + model.getValueAt(i, 4).toString() + "\n";
+                        model.removeRow(i);
+                    }
+                } 
+                catch (Exception ex) {
                     Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                prmodel.crear(datosGuardar);
             }
+            JOptionPane.showMessageDialog(this, "Resultado de la transaccion: \n " + result);
         } else {
             JOptionPane.showMessageDialog(this, "No existen preguntas a agregar en la base de datos.");
         }

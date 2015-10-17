@@ -7,12 +7,10 @@ package Controller;
 
 
 import Model.Pregunta;
-import Model.Tema;
+import View.frm_NewPregunta;
 import View.frm_NewTema;
-import View.frm_NewUsuario;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -38,28 +36,27 @@ public class PreguntaController {
     }    
     /**
      * 
-     * @param Nombre
-     * @param idMateria
+     * @param item
      * @return  valor entero con el cual validar si la creacion se realizo 
      *          correctamente
      */
     public int CrearPregunta(Pregunta item){
         int insert =0;
-        String x = item.getPregunta();
-        int y = item.getIdTema();
-        int z = item.getIdComplegidad();
-         int w = item.getIdTipoPregunta();
-        
+        Pregunta preg = new Pregunta();
+        preg = item;
+        System.out.println(item.getIdPregunta()+" -- "+item.getPregunta() );
         String Query =  "INSERT INTO tnt_exam.preguntas" +
                 "(Pregunta" +
                 ",Temas_idTema" +
+                ",Temas_Materias_idMateria" +
                 ",Complejidads_idComplejidad" +
                 ",TipoPreguntas_idTipoPreguntas)" +
                 " VALUES ("+
-                "'"+item.getPregunta()+"'"+
-                ","+item.getIdTema()+
-                ","+item.getIdComplegidad()+
-                ","+item.getIdTipoPregunta()+")";
+                "'"+preg.getPregunta()+"'"+
+                ","+preg.getIdTema()+
+                ","+preg.getIdMateria()+
+                ","+preg.getIdComplegidad()+
+                ","+preg.getIdTipoPregunta()+")";
         try {
             if (this.Con.conectar()) {
                 insert = Con.insertar(Query);
@@ -70,10 +67,17 @@ public class PreguntaController {
                 insert = -1;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(frm_NewTema.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_NewPregunta.class.getName()).log(Level.SEVERE, null, ex);
             insert = 0;
         }
         return insert;
+    }
+
+    public void CrearPregunta(String Pregunta) {
+        
+        System.out.println(Pregunta);
+
+//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

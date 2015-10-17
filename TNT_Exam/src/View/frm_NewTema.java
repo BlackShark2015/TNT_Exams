@@ -203,8 +203,9 @@ public final class frm_NewTema extends javax.swing.JFrame {
         if(txt_Tema.getText().length() == 0 || jComboBox1.getSelectedIndex() == 0)
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorio.");
         else{
-            tem.setNombre(txt_Tema.getText());
-            tem.setIdMateria(jComboBox1.getSelectedIndex());
+            tem.setNombre(txt_Tema.getText());  
+            tem.setIdMateria(((Item)jComboBox1.getSelectedItem()).getId());
+            
             int result = temaC.CrearTema(tem.getNombre(), tem.getIdMateria());
             if(result > 0)
                 JOptionPane.showMessageDialog(this, "Tema Registrado.");

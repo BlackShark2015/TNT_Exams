@@ -41,21 +41,21 @@ public class ComplejidadController {
         }
         return rsComp;
     }
-    public int ObtenerComplegidad(String Complegidad) throws SQLException{
+    public int ObtenerComplegidad(String Complejidad) throws SQLException{
         ResultSet rsCmpl = null;
         try {
             if (this.Con.conectar()) {
-                rsCmpl = Con.consulta("select * from complejidads where Nombre = '" + Complegidad + "'");
+                rsCmpl = Con.consulta("select * from complejidads where Nombre = '" + Complejidad + "'");
                 rsCmpl.next();
                 
                 if(rsCmpl.getRow() > 0)
-                    return (int) rsCmpl.getObject("IdTipoPreguntas");
+                    return (int) rsCmpl.getObject("idComplejidad");
                 Con.cierraConexion();
             } 
         } catch (SQLException ex) {
             
         }
-        return (int) rsCmpl.getObject("IdTipoPreguntas");
+        return (int) rsCmpl.getObject("idComplejidad");
       }
     
 }

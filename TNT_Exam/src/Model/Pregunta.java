@@ -1,8 +1,12 @@
 package Model;
 
 
+import Controller.ComplejidadController;
 import Controller.PreguntaController;
+import Controller.TemaController;
+import Controller.TipoPreguntaController;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -14,10 +18,16 @@ import java.util.logging.Logger;
  * clase que describe pregunta
  */
 public class Pregunta {
-
+    
+    private TemaController temaC;
+    private TipoPreguntaController tipoP;
+    private ComplejidadController compC;
+    
     private int IdPregunta;
 
     private int idTema;
+    
+    private int idMateria;
 
     private int idTipoPregunta;
 
@@ -40,7 +50,15 @@ public class Pregunta {
     public void setIdTema(int idTema) {
         this.idTema = idTema;
     }
+    
+    public int getIdMateria() {
+        return idMateria;
+    }
 
+    public void setIdMateria(int idMateria) {
+        this.idMateria = idMateria;
+    }
+    
     public int getIdTipoPregunta() {
         return idTipoPregunta;
     }
@@ -65,7 +83,7 @@ public class Pregunta {
         this.Pregunta = Pregunta;
     }
 
-   public ArrayList crear() {
+/*   public ArrayList crear() {
         try {
             PreguntaController pc = new PreguntaController();
             Pregunta p = null;
@@ -84,14 +102,20 @@ public class Pregunta {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
-   public void crear(Vector item) {
+   public void crear(String item){
         try {
             PreguntaController pc = new PreguntaController();
             Pregunta p = null;
-            p.Pregunta=item.get(4).toString();
-            p.idTema=(int) item.get(1);
-            p.idComplegidad = (int) item.get(2);
-            p.idTipoPregunta = (int) item.get(3);
+            //p.setPregunta(item.get(4).toString());
+            //p.setIdTema(temaC.ObtenerTema(item.get(1).toString()));
+            //p.setIdComplegidad(compC.ObtenerComplegidad(item.get(2).toString()));
+            //p.setIdTipoPregunta(tipoP.ObtenerTipoPregunta(item.get(3).toString()));
+            
+            
+            //p.setPregunta(item[4].toString());
+            //p.setIdTema(temaC.ObtenerTema(item[1].toString()));
+            //p.setIdComplegidad(compC.ObtenerComplegidad(item[2].toString()));
+            //p.setIdTipoPregunta(tipoP.ObtenerTipoPregunta(item[3].toString()));
             
             pc.CrearPregunta(p);
     
@@ -102,7 +126,7 @@ public class Pregunta {
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+*/
     public ArrayList actualizar(ArrayList item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
