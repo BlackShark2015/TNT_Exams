@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="TNT_Exam">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="Cliente_Servidor" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="prp" type="ftm_Principal" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="startClient" returnType="//MÃ©todo para iniciar el cliente
+void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Conexion" package="Cliente_Servidor" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="PUERTO" type="int" visibility="private" isFinal="true"/>
+        <Field name="HOST" type="String" visibility="private" isFinal="true"/>
+        <Field name="mensajeServidor" type="String" visibility="protected"/>
+        <Field name="ss" type="ServerSocket" visibility="protected"/>
+        <Field name="cs" type="Socket" visibility="protected"/>
+        <Field name="salidaServidor" type="DataOutputStream" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MainCliente" package="Cliente_Servidor" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MainServidor" package="Cliente_Servidor" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Servidor" package="Cliente_Servidor" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="socket" type="Socket" visibility="private"/>
+        <Field name="dos" type="DataOutputStream" visibility="private"/>
+        <Field name="dis" type="DataInputStream" visibility="private"/>
+        <Field name="idSessio" type="int" visibility="private"/>
+        <Field name="fecTime" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Socket" name="socket"/>
+          <Argument type="int" name="id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="desconnectar" returnType="void" visibility="public"/>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ComplejidadController" package="Controller" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="ConsultarComplejidad" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerComplegidad" returnType="int" visibility="public">
+          <Argument type="String" name="Complegidad"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Conectadb" package="Controller" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="usuario" type="String" visibility="private"/>
+        <Field name="clave" type="String" visibility="private"/>
+        <Field name="url" type="String" visibility="private"/>
+        <Field name="driverClassName" type="String" visibility="private"/>
+        <Field name="conn" type="Connection" visibility="private"/>
+        <Field name="estancia" type="Statement" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="usuario"/>
+          <Argument type="String" name="clave"/>
+          <Argument type="String" name="url"/>
+          <Argument type="String" name="driverClassName"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getClave" returnType="String" visibility="public"/>
+        <Method name="getUrl" returnType="String" visibility="public"/>
+        <Method name="getUsuario" returnType="String" visibility="public"/>
+        <Method name="getConn" returnType="Connection" visibility="public"/>
+        <Method name="getDriverClassName" returnType="String" visibility="public"/>
+        <Method name="setClave" returnType="void" visibility="public">
+          <Argument type="String" name="clave"/>
+        </Method>
+        <Method name="setUrl" returnType="void" visibility="public">
+          <Argument type="String" name="url"/>
+        </Method>
+        <Method name="setUsuario" returnType="void" visibility="public">
+          <Argument type="String" name="usuario"/>
+        </Method>
+        <Method name="setConn" returnType="void" visibility="public">
+          <Argument type="Connection" name="conn"/>
+        </Method>
+        <Method name="setDriverClassName" returnType="void" visibility="public">
+          <Argument type="String" name="driverClassName"/>
+        </Method>
+        <Method name="conectar" returnType="boolean" visibility="public"/>
+        <Method name="cierraConexion" returnType="void" visibility="public"/>
+        <Method name="consulta" returnType="ResultSet" visibility="public">
+          <Argument type="String" name="consulta"/>
+        </Method>
+        <Method name="actualizar" returnType="void" visibility="public">
+          <Argument type="String" name="actualiza"/>
+        </Method>
+        <Method name="borrar" returnType="ResultSet" visibility="public">
+          <Argument type="String" name="borra"/>
+        </Method>
+        <Method name="insertar" returnType="int" visibility="public">
+          <Argument type="String" name="inserta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MateriaController" package="Controller" visibility="public" isFinal="true" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="mat" type="Materia" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearMaterial" returnType="int" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="ObtenerMateria" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerMateria" returnType="int" visibility="public">
+          <Argument type="String" name="Materia"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PreguntaController" package="Controller" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearPregunta" returnType="int" visibility="public">
+          <Argument type="Pregunta" name="item"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TemaController" package="Controller" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="tem" type="Tema" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearTema" returnType="int" visibility="public">
+          <Argument type="String" name="Nombre"/>
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="ObtenerTema" returnType="ResultSet" visibility="public">
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="ObtenerTema" returnType="int" visibility="public">
+          <Argument type="String" name="Tema"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoPreguntaController" package="Controller" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="ObtenerTipoPregunta" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerTipoPregunta" returnType="int" visibility="public">
+          <Argument type="String" name="TipPreg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DataExamen" package="Model" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="DescripcionExamen" package="Model" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Fields>
+        <Field name="idDescripcionExamen" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="cantidadPreguntaTema" type="int" visibility="public"/>
+        <Field name="PorcentagePRegunta" type="double" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ObtenerExamen" returnType="int" visibility="public">
+          <Argument type="int" name="idSolicitud"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getIdDescripcionExamen" returnType="int" visibility="public"/>
+        <Method name="setIdDescripcionExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idDescripcionExamen"/>
+        </Method>
+        <Method name="getIdExamen" returnType="int" visibility="public"/>
+        <Method name="setIdExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idExamen"/>
+        </Method>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Examen" package="Model" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="cantidadPreguntas" type="int" visibility="public"/>
+        <Field name="fechaRegistro" type="Date" visibility="private"/>
+        <Field name="idUsuario" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="CrearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getFechaRegistro" returnType="Date" visibility="public"/>
+        <Method name="setFechaRegistro" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaRegistro"/>
+        </Method>
+        <Method name="getIdUsuario" returnType="int" visibility="public"/>
+        <Method name="setIdUsuario" returnType="void" visibility="public">
+          <Argument type="int" name="idUsuario"/>
+        </Method>
+        <Method name="getIdExamen" returnType="int" visibility="public"/>
+        <Method name="setIdExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idExamen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ExamenAditions" package="Model" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ExamenBase" package="Model" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="HeaderExamen" package="Model" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Materia" package="Model" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields>
+        <Field name="IdMateria" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+        <Method name="getIdMateria" returnType="int" visibility="public"/>
+        <Method name="setIdMateria" returnType="void" visibility="public">
+          <Argument type="int" name="IdMateria"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Pregunta" package="Model" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields>
+        <Field name="IdPregunta" type="int" visibility="private"/>
+        <Field name="idTema" type="int" visibility="private"/>
+        <Field name="idTipoPregunta" type="int" visibility="private"/>
+        <Field name="idComplegidad" type="int" visibility="private"/>
+        <Field name="Pregunta" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="IdPregunta"/>
+        </Method>
+        <Method name="getIdTema" returnType="int" visibility="public"/>
+        <Method name="setIdTema" returnType="void" visibility="public">
+          <Argument type="int" name="idTema"/>
+        </Method>
+        <Method name="getIdTipoPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdTipoPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoPregunta"/>
+        </Method>
+        <Method name="getIdComplegidad" returnType="int" visibility="public"/>
+        <Method name="setIdComplegidad" returnType="void" visibility="public">
+          <Argument type="int" name="idComplegidad"/>
+        </Method>
+        <Method name="getPregunta" returnType="String" visibility="public"/>
+        <Method name="setPregunta" returnType="void" visibility="public">
+          <Argument type="String" name="Pregunta"/>
+        </Method>
+        <Method name="crear" returnType="ArrayList" visibility="public"/>
+        <Method name="crear" returnType="void" visibility="public">
+          <Argument type="Vector" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PreguntasModel" package="Model" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Fields>
+        <Field name="_pregunta" type="Pregunta" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="Pregunta" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Respuesta" package="Model" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Fields>
+        <Field name="idRespuesta" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="respuesta" type="String" visibility="public"/>
+        <Field name="correcta" type="boolean" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearRespuesta" returnType="Respuesta" visibility="public">
+          <Argument type="Respuesta" name="item"/>
+        </Method>
+        <Method name="getIdRespuesta" returnType="int" visibility="public"/>
+        <Method name="setIdRespuesta" returnType="void" visibility="public">
+          <Argument type="int" name="idRespuesta"/>
+        </Method>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tema" package="Model" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Fields>
+        <Field name="IdTema" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="idMateria" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+        <Method name="getIdTema" returnType="int" visibility="public"/>
+        <Method name="setIdTema" returnType="void" visibility="public">
+          <Argument type="int" name="IdTema"/>
+        </Method>
+        <Method name="getIdMateria" returnType="int" visibility="public"/>
+        <Method name="setIdMateria" returnType="void" visibility="public">
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoComplejidad" package="Model" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Fields>
+        <Field name="idTipoComplegidad" type="int" visibility="private"/>
+        <Field name="insTipComplejidad" type="TipoComplejidad" visibility="private" isStatic="true"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIntance" returnType="TipoComplejidad" visibility="public" isStatic="true"/>
+        <Method name="getIdTipoComplegidad" returnType="int" visibility="public"/>
+        <Method name="setIdTipoComplegidad" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoComplegidad"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="Descripcion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoPregunta" package="Model" visibility="public" xPosition="2120.0" yPosition="820.0">
+      <Fields>
+        <Field name="IdTipoPregunta" type="int" visibility="private"/>
+        <Field name="insTipPregunta" type="TipoPregunta" visibility="private" isStatic="true"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIntance" returnType="TipoPregunta" visibility="public" isStatic="true"/>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="Descripcion"/>
+        </Method>
+        <Method name="getIdTipoPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdTipoPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="IdTipoPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TrailerExamen" package="Model" visibility="public" xPosition="20.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="Util" package="Model" visibility="public" xPosition="320.0" yPosition="1220.0">
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="UtilExamen" package="Model" visibility="public" isAbstract="true" xPosition="620.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="generarExamen" returnType="DescripcionExamen" visibility="public">
+          <Argument type="DescripcionExamen" name="item"/>
+        </Method>
+        <Method name="consultarExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public" isAbstract="true">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_Consultar" package="View" visibility="public" xPosition="920.0" yPosition="1220.0">
+      <Fields>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jComboBox1" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTable1" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jTextField1" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_LogIn" package="View" visibility="public" xPosition="1220.0" yPosition="1220.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="txt_Password" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="txt_User" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txt_UserActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_NewExamen" package="View" visibility="public" xPosition="1520.0" yPosition="1220.0">
+      <Fields>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jComboBox1" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jComboBox2" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jComboBox3" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTable1" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jTextField1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField2" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jTextField3" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_NewMateria" package="View" visibility="public" xPosition="1820.0" yPosition="1220.0">
+      <Fields>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="txt_Material" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_NewPregunta" package="View" visibility="public" isFinal="true" xPosition="2120.0" yPosition="1220.0">
+      <Fields>
+        <Field name="prmodel" type="Pregunta" visibility="private"/>
+        <Field name="matC" type="MateriaController" visibility="private"/>
+        <Field name="temaC" type="TemaController" visibility="private"/>
+        <Field name="tipoP" type="TipoPreguntaController" visibility="private"/>
+        <Field name="compC" type="ComplejidadController" visibility="private"/>
+        <Field name="full_datos" type="ArrayList&lt;String&gt;" visibility="package"/>
+        <Field name="Btn_Add" type="javax.swing.JButton" visibility="private"/>
+        <Field name="Btn_Guardar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="Btn_Remove" type="javax.swing.JButton" visibility="private"/>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jTable1" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jcmbComplejidad" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jcmbMateria" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jcmbTema" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jcmbTipoPregunta" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jtblPreguntas" type="javax.swing.JTable" visibility="private"/>
+        <Field name="jtxtPregunta" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="jcmbComplejidadActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jcmbMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jcmbTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jcmbMateriaItemStateChanged" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ItemEvent" name="evt"/>
+        </Method>
+        <Method name="jcmbMateriaPropertyChange" returnType="void" visibility="private">
+          <Argument type="java.beans.PropertyChangeEvent" name="evt"/>
+        </Method>
+        <Method name="jcmbTipoPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Btn_AddActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Btn_GuardarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="Btn_RemoveActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_NewTema" package="View" visibility="public" isFinal="true" xPosition="20.0" yPosition="1620.0">
+      <Fields>
+        <Field name="temaC" type="TemaController" visibility="private"/>
+        <Field name="matC" type="MateriaController" visibility="private"/>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jComboBox1" type="javax.swing.JComboBox" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="txt_Tema" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="txt_TemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="frm_NewUsuario" package="View" visibility="public" xPosition="320.0" yPosition="1620.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+        <Field name="txt_ConfirmPass" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="txt_Email" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txt_FechaNacimiento" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txt_Ident" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txt_Nombre" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txt_Pass" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="txt_Perfil" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txt_UserName" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButton1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ftm_Principal" package="View" visibility="public" xPosition="620.0" yPosition="1620.0">
+      <Fields>
+        <Field name="ConsultarExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearExamen" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearMateria" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearPregunta" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearTema" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="CrearUsuario" type="javax.swing.JMenuItem" visibility="private"/>
+        <Field name="Exam" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="Parametri" type="javax.swing.JMenu" visibility="private"/>
+        <Field name="jMenuBar1" type="javax.swing.JMenuBar" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="ConsultarExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearUsuarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearMateriaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearTemaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearPreguntaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="CrearExamenActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Item" package="View" visibility="public" xPosition="920.0" yPosition="1620.0">
+      <Fields>
+        <Field name="id" type="int" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="id"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getId" returnType="int" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="Model.TipoComplejidad" target="Model.TipoComplejidad" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="View.frm_LogIn" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.ComplejidadController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.TemaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.TipoPregunta" target="Model.TipoPregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tem" source="Controller.TemaController" target="Model.Tema" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.UtilExamen" target="Model.Examen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="prp" source="Cliente_Servidor.Cliente" target="View.ftm_Principal" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Materia" target="Model.Util"/>
+    <IsRelation name="is" source="Model.ExamenBase" target="Model.Examen"/>
+    <HasRelation name="mat" source="Controller.MateriaController" target="Model.Materia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.TipoPreguntaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.PreguntaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.PreguntasModel" target="Model.Pregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="insTipPregunta" source="Model.TipoPregunta" target="Model.TipoPregunta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tipoP" source="View.frm_NewPregunta" target="Controller.TipoPreguntaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.TrailerExamen" target="Model.ExamenAditions"/>
+    <HasRelation name="matC" source="View.frm_NewTema" target="Controller.MateriaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.Examen" target="Model.UtilExamen"/>
+    <HasRelation name="insTipComplejidad" source="Model.TipoComplejidad" target="Model.TipoComplejidad" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="temaC" source="View.frm_NewPregunta" target="Controller.TemaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Controller.PreguntaController" target="Model.Pregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.DescripcionExamen" target="Model.UtilExamen"/>
+    <HasRelation name="prmodel" source="View.frm_NewPregunta" target="Model.Pregunta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.ExamenAditions" target="Model.Examen"/>
+    <HasRelation name="matC" source="View.frm_NewPregunta" target="Controller.MateriaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.DataExamen" target="Model.ExamenAditions"/>
+    <HasRelation name="_pregunta" source="Model.PreguntasModel" target="Model.Pregunta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="temaC" source="View.frm_NewTema" target="Controller.TemaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="View.frm_NewUsuario" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.Respuesta" target="Model.Respuesta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="View.frm_NewPregunta" target="View.Item" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="compC" source="View.frm_NewPregunta" target="Controller.ComplejidadController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.MateriaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Tema" target="Model.Util"/>
+    <IsRelation name="is" source="Cliente_Servidor.Cliente" target="Cliente_Servidor.Conexion"/>
+    <IsRelation name="is" source="Model.HeaderExamen" target="Model.ExamenAditions"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
