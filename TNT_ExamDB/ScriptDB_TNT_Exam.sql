@@ -10,14 +10,14 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema TNT_Exam
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `TNT_Exam` ;
+DROP SCHEMA IF EXISTS `blackshark` ;
 
 -- -----------------------------------------------------
 -- Schema TNT_Exam
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `TNT_Exam` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+CREATE SCHEMA IF NOT EXISTS `blackshark` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 SHOW WARNINGS;
-USE `TNT_Exam` ;
+USE `blackshark` ;
 
 -- -----------------------------------------------------
 -- Table `Usuarios`
