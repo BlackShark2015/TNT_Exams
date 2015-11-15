@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-package class diagram">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="Cliente_Servidor" visibility="public" xPosition="278.0" yPosition="166.0">
+      <Fields>
+        <Field name="prp" type="ftm_Principal" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="startClient" returnType="//MÃ©todo para iniciar el cliente void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Conexion" package="Cliente_Servidor" visibility="public" xPosition="317.0" yPosition="547.0">
+      <Fields>
+        <Field name="PUERTO" type="int" visibility="private" isFinal="true"/>
+        <Field name="HOST" type="String" visibility="private" isFinal="true"/>
+        <Field name="mensajeServidor" type="String" visibility="protected"/>
+        <Field name="ss" type="ServerSocket" visibility="protected"/>
+        <Field name="cs" type="Socket" visibility="protected"/>
+        <Field name="salidaServidor" type="DataOutputStream" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MainCliente" package="Cliente_Servidor" visibility="public" xPosition="727.0" yPosition="185.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MainServidor" package="Cliente_Servidor" visibility="public" xPosition="1094.0" yPosition="436.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Servidor" package="Cliente_Servidor" visibility="public" xPosition="725.0" yPosition="370.0">
+      <Fields>
+        <Field name="socket" type="Socket" visibility="private"/>
+        <Field name="dos" type="DataOutputStream" visibility="private"/>
+        <Field name="dis" type="DataInputStream" visibility="private"/>
+        <Field name="idSessio" type="int" visibility="private"/>
+        <Field name="fecTime" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Socket" name="socket"/>
+          <Argument type="int" name="id"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="desconnectar" returnType="void" visibility="public"/>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DataExamen" package="Model" visibility="public" xPosition="146.0" yPosition="897.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="DescripcionExamen" package="Model" visibility="public" xPosition="823.0" yPosition="958.0">
+      <Fields>
+        <Field name="idDescripcionExamen" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="cantidadPreguntaTema" type="int" visibility="public"/>
+        <Field name="PorcentagePRegunta" type="double" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ObtenerExamen" returnType="int" visibility="public">
+          <Argument type="int" name="idSolicitud"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getIdDescripcionExamen" returnType="int" visibility="public"/>
+        <Method name="setIdDescripcionExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idDescripcionExamen"/>
+        </Method>
+        <Method name="getIdExamen" returnType="int" visibility="public"/>
+        <Method name="setIdExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idExamen"/>
+        </Method>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Examen" package="Model" visibility="public" xPosition="124.0" yPosition="1524.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="cantidadPreguntas" type="int" visibility="public"/>
+        <Field name="fechaRegistro" type="Date" visibility="private"/>
+        <Field name="idUsuario" type="int" visibility="private"/>
+        <Field name="idExamen" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="CrearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getFechaRegistro" returnType="Date" visibility="public"/>
+        <Method name="setFechaRegistro" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaRegistro"/>
+        </Method>
+        <Method name="getIdUsuario" returnType="int" visibility="public"/>
+        <Method name="setIdUsuario" returnType="void" visibility="public">
+          <Argument type="int" name="idUsuario"/>
+        </Method>
+        <Method name="getIdExamen" returnType="int" visibility="public"/>
+        <Method name="setIdExamen" returnType="void" visibility="public">
+          <Argument type="int" name="idExamen"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ExamenAditions" package="Model" visibility="public" xPosition="180.0" yPosition="1205.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ExamenBase" package="Model" visibility="public" xPosition="180.0" yPosition="2053.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="HeaderExamen" package="Model" visibility="public" xPosition="478.0" yPosition="1184.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Materia" package="Model" visibility="public" xPosition="1330.0" yPosition="2175.0">
+      <Fields>
+        <Field name="IdMateria" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+        <Method name="getIdMateria" returnType="int" visibility="public"/>
+        <Method name="setIdMateria" returnType="void" visibility="public">
+          <Argument type="int" name="IdMateria"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Pregunta" package="Model" visibility="public" xPosition="1548.0" yPosition="847.0">
+      <Fields>
+        <Field name="temaC" type="TemaController" visibility="private"/>
+        <Field name="tipoP" type="TipoPreguntaController" visibility="private"/>
+        <Field name="compC" type="ComplejidadController" visibility="private"/>
+        <Field name="IdPregunta" type="int" visibility="private"/>
+        <Field name="idTema" type="int" visibility="private"/>
+        <Field name="idMateria" type="int" visibility="private"/>
+        <Field name="idTipoPregunta" type="int" visibility="private"/>
+        <Field name="idComplegidad" type="int" visibility="private"/>
+        <Field name="Pregunta" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="IdPregunta"/>
+        </Method>
+        <Method name="getIdTema" returnType="int" visibility="public"/>
+        <Method name="setIdTema" returnType="void" visibility="public">
+          <Argument type="int" name="idTema"/>
+        </Method>
+        <Method name="getIdMateria" returnType="int" visibility="public"/>
+        <Method name="setIdMateria" returnType="void" visibility="public">
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="getIdTipoPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdTipoPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoPregunta"/>
+        </Method>
+        <Method name="getIdComplegidad" returnType="int" visibility="public"/>
+        <Method name="setIdComplegidad" returnType="void" visibility="public">
+          <Argument type="int" name="idComplegidad"/>
+        </Method>
+        <Method name="getPregunta" returnType="String" visibility="public"/>
+        <Method name="setPregunta" returnType="void" visibility="public">
+          <Argument type="String" name="Pregunta"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PreguntasModel" package="Model" visibility="public" xPosition="2330.0" yPosition="821.0">
+      <Fields>
+        <Field name="_pregunta" type="Pregunta" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="Pregunta" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Respuesta" package="Model" visibility="public" xPosition="1169.0" yPosition="136.0">
+      <Fields>
+        <Field name="idRespuesta" type="int" visibility="private"/>
+        <Field name="idPregunta" type="int" visibility="private"/>
+        <Field name="respuesta" type="String" visibility="public"/>
+        <Field name="correcta" type="boolean" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearRespuesta" returnType="Respuesta" visibility="public">
+          <Argument type="Respuesta" name="item"/>
+        </Method>
+        <Method name="getIdRespuesta" returnType="int" visibility="public"/>
+        <Method name="setIdRespuesta" returnType="void" visibility="public">
+          <Argument type="int" name="idRespuesta"/>
+        </Method>
+        <Method name="getIdPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="idPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Tema" package="Model" visibility="public" xPosition="920.0" yPosition="2099.0">
+      <Fields>
+        <Field name="IdTema" type="int" visibility="private"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="idMateria" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+        <Method name="getIdTema" returnType="int" visibility="public"/>
+        <Method name="setIdTema" returnType="void" visibility="public">
+          <Argument type="int" name="IdTema"/>
+        </Method>
+        <Method name="getIdMateria" returnType="int" visibility="public"/>
+        <Method name="setIdMateria" returnType="void" visibility="public">
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoComplejidad" package="Model" visibility="public" xPosition="2082.0" yPosition="141.0">
+      <Fields>
+        <Field name="idTipoComplegidad" type="int" visibility="private"/>
+        <Field name="insTipComplejidad" type="TipoComplejidad" visibility="private" isStatic="true"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIntance" returnType="TipoComplejidad" visibility="public" isStatic="true"/>
+        <Method name="getIdTipoComplegidad" returnType="int" visibility="public"/>
+        <Method name="setIdTipoComplegidad" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoComplegidad"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="Descripcion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoPregunta" package="Model" visibility="public" xPosition="1621.0" yPosition="122.0">
+      <Fields>
+        <Field name="IdTipoPregunta" type="int" visibility="private"/>
+        <Field name="insTipPregunta" type="TipoPregunta" visibility="private" isStatic="true"/>
+        <Field name="Nombre" type="String" visibility="private"/>
+        <Field name="Descripcion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="protected"/>
+      </Constructors>
+      <Methods>
+        <Method name="getIntance" returnType="TipoPregunta" visibility="public" isStatic="true"/>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="setDescripcion" returnType="void" visibility="public">
+          <Argument type="String" name="Descripcion"/>
+        </Method>
+        <Method name="getIdTipoPregunta" returnType="int" visibility="public"/>
+        <Method name="setIdTipoPregunta" returnType="void" visibility="public">
+          <Argument type="int" name="IdTipoPregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TrailerExamen" package="Model" visibility="public" xPosition="478.0" yPosition="897.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="UtilExamen" package="Model" visibility="public" isAbstract="true" xPosition="675.0" yPosition="1482.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="generarExamen" returnType="DescripcionExamen" visibility="public">
+          <Argument type="DescripcionExamen" name="item"/>
+        </Method>
+        <Method name="consultarExamen" returnType="String" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="crearExamen" returnType="String" visibility="public" isAbstract="true">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ComplejidadController" package="Controller" visibility="public" xPosition="2265.0" yPosition="1018.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="ConsultarComplejidad" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerComplegidad" returnType="int" visibility="public">
+          <Argument type="String" name="Complejidad"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Conectadb" package="Controller" visibility="public" xPosition="1889.0" yPosition="1415.0">
+      <Fields>
+        <Field name="usuario" type="String" visibility="private"/>
+        <Field name="clave" type="String" visibility="private"/>
+        <Field name="url" type="String" visibility="private"/>
+        <Field name="driverClassName" type="String" visibility="private"/>
+        <Field name="conn" type="Connection" visibility="private"/>
+        <Field name="estancia" type="Statement" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="usuario"/>
+          <Argument type="String" name="clave"/>
+          <Argument type="String" name="url"/>
+          <Argument type="String" name="driverClassName"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getClave" returnType="String" visibility="public"/>
+        <Method name="getUrl" returnType="String" visibility="public"/>
+        <Method name="getUsuario" returnType="String" visibility="public"/>
+        <Method name="getConn" returnType="Connection" visibility="public"/>
+        <Method name="getDriverClassName" returnType="String" visibility="public"/>
+        <Method name="setClave" returnType="void" visibility="public">
+          <Argument type="String" name="clave"/>
+        </Method>
+        <Method name="setUrl" returnType="void" visibility="public">
+          <Argument type="String" name="url"/>
+        </Method>
+        <Method name="setUsuario" returnType="void" visibility="public">
+          <Argument type="String" name="usuario"/>
+        </Method>
+        <Method name="setConn" returnType="void" visibility="public">
+          <Argument type="Connection" name="conn"/>
+        </Method>
+        <Method name="setDriverClassName" returnType="void" visibility="public">
+          <Argument type="String" name="driverClassName"/>
+        </Method>
+        <Method name="conectar" returnType="boolean" visibility="public"/>
+        <Method name="cierraConexion" returnType="void" visibility="public"/>
+        <Method name="consulta" returnType="ResultSet" visibility="public">
+          <Argument type="String" name="consulta"/>
+        </Method>
+        <Method name="actualizar" returnType="void" visibility="public">
+          <Argument type="String" name="actualiza"/>
+        </Method>
+        <Method name="borrar" returnType="ResultSet" visibility="public">
+          <Argument type="String" name="borra"/>
+        </Method>
+        <Method name="insertar" returnType="int" visibility="public">
+          <Argument type="String" name="inserta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MateriaController" package="Controller" visibility="public" isFinal="true" xPosition="1984.0" yPosition="2106.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="mat" type="Materia" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearMaterial" returnType="int" visibility="public">
+          <Argument type="String" name="Nombre"/>
+        </Method>
+        <Method name="ObtenerMateria" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerMateria" returnType="int" visibility="public">
+          <Argument type="String" name="Materia"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PreguntaController" package="Controller" visibility="public" xPosition="2664.0" yPosition="1433.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearPregunta" returnType="int" visibility="public">
+          <Argument type="Pregunta" name="item"/>
+        </Method>
+        <Method name="CrearPregunta" returnType="void" visibility="public">
+          <Argument type="String" name="Pregunta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TemaController" package="Controller" visibility="public" xPosition="1452.0" yPosition="1838.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+        <Field name="tem" type="Tema" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="CrearTema" returnType="int" visibility="public">
+          <Argument type="String" name="Nombre"/>
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="ObtenerTema" returnType="ResultSet" visibility="public">
+          <Argument type="int" name="idMateria"/>
+        </Method>
+        <Method name="ObtenerTema" returnType="int" visibility="public">
+          <Argument type="String" name="Tema"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipoPreguntaController" package="Controller" visibility="public" xPosition="2563.0" yPosition="1205.0">
+      <Fields>
+        <Field name="Con" type="Conectadb" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="inicializar" returnType="void" visibility="public"/>
+        <Method name="ObtenerTipoPregunta" returnType="ResultSet" visibility="public"/>
+        <Method name="ObtenerTipoPregunta" returnType="int" visibility="public">
+          <Argument type="String" name="TipPreg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Util" package="Model" visibility="public" xPosition="1031.0" yPosition="1782.0">
+      <Methods>
+        <Method name="crear" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="actualizar" returnType="ArrayList" visibility="public">
+          <Argument type="ArrayList" name="item"/>
+        </Method>
+        <Method name="consultar" returnType="int" visibility="public">
+          <Argument type="int" name="idItem"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Pregunta" target="Model.Util"/>
+    <HasRelation name="_pregunta" source="Model.PreguntasModel" target="Model.Pregunta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Cli" source="Cliente_Servidor.Cliente" target="Cliente_Servidor.MainCliente" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.DescripcionExamen" target="Model.UtilExamen"/>
+    <HasRelation name="pregResp" source="Model.Pregunta" target="Model.Respuesta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="mat" source="Controller.MateriaController" target="Model.Materia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Tema" target="Model.Util"/>
+    <HasRelation name="Con" source="Controller.TipoPreguntaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="examDescExam" source="Model.Examen" target="Model.DescripcionExamen" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.UtilExamen" target="Model.Examen" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.DataExamen" target="Model.ExamenAditions"/>
+    <IsRelation name="is" source="Model.HeaderExamen" target="Model.ExamenAditions"/>
+    <HasRelation name="tem" source="Controller.TemaController" target="Model.Tema" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.TemaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.TrailerExamen" target="Model.ExamenAditions"/>
+    <IsRelation name="is" source="Model.Examen" target="Model.UtilExamen"/>
+    <UseRelation source="Model.TipoComplejidad" target="Model.TipoComplejidad" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="descExamPregunta" source="Model.DescripcionExamen" target="Model.Pregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="ArrayList"/>
+    <UseRelation source="Model.Respuesta" target="Model.Respuesta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.PreguntasModel" target="Model.Pregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Model.Materia" target="Model.Util"/>
+    <HasRelation name="Con" source="Controller.PreguntaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="temaC" source="Model.Pregunta" target="Controller.TemaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="servidor" source="Cliente_Servidor.Servidor" target="Cliente_Servidor.MainServidor" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.ExamenAditions" target="Model.Examen"/>
+    <HasRelation name="insTipComplejidad" source="Model.TipoComplejidad" target="Model.TipoComplejidad" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Cliente_Servidor.Cliente" target="Cliente_Servidor.Conexion"/>
+    <HasRelation name="insTipPregunta" source="Model.TipoPregunta" target="Model.TipoPregunta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Controller.PreguntaController" target="Model.Pregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="pregTipoPreg" source="Model.Pregunta" target="Model.TipoPregunta" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tipoP" source="Model.Pregunta" target="Controller.TipoPreguntaController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.MateriaController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Con" source="Controller.ComplejidadController" target="Controller.Conectadb" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="compC" source="Model.Pregunta" target="Controller.ComplejidadController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="pregTipoCompl" source="Model.Pregunta" target="Model.TipoComplejidad" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation source="Model.TipoPregunta" target="Model.TipoPregunta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Model.ExamenBase" target="Model.Examen"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
