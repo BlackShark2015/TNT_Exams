@@ -10,13 +10,14 @@
         <script src="js/jquery-2.1.4.js" ></script>
         <script src="js/bootstrap.js" ></script>
         <div class="container">
+            
             <img src="imagenes/shark.png" alt="Black Shark" height="242" width="242"></img>
             <div class="navbar">
                <div class="container"> 
                    <ul class="nav">
                        <li class="active"><a href="index.xhtml">Home</a></li>
                        <li><a href="vw_Materia.xhtml">Materia</a></li>
-                       <li><a href="vw_Tema.xhtml">Tema</a></li>
+                       <li><a href="*">Tema</a></li>
                        <li><a href="*">Pregunta</a></li>
                        <li><a href="*">Respuesta</a></li>
                        <li><a href="*">Examen</a></li>
@@ -24,7 +25,10 @@
                </div>
             </div>
         </div>
+        <h:form>
+            Materia a crear: <input  align="right" type="text" name="newMateria" value="#{materiaControl.materia}"></input><br></br>
+            <input  type="submit" value="Enviar" action="vw_MateriaRespuesta"  ></input>
+        </h:form>
          
     </h:body>
 </html>
-

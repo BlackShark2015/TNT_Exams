@@ -109,11 +109,11 @@ public class Login_Validar
         }
     }
     
-    public static void main(String args[]) 
+    /*public static void main(String args[]) 
     {
         Login_Validar val = new Login_Validar();
         val.validar();
-    }
+    }*/
     
 
     
