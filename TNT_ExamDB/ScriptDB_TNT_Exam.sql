@@ -176,11 +176,11 @@ SHOW WARNINGS;
 -- Data for table `Complejidads`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `TNT_Exam`;
+USE `blackshark` ;
 INSERT INTO `Complejidads` (`idComplejidad`, `Nombre`, `Descripcion`) VALUES (DEFAULT, 'Facil', 'Facil');
 INSERT INTO `Complejidads` (`idComplejidad`, `Nombre`, `Descripcion`) VALUES (DEFAULT, 'Normal', 'Normal');
 INSERT INTO `Complejidads` (`idComplejidad`, `Nombre`, `Descripcion`) VALUES (DEFAULT, 'Dificil', 'Dificil');
-
+INSERT INTO `blackshark`.`Usuarios`(`identificacion`,`Nombre`,`Email`,`Password`,`FechaNacimiento`,`UserName`,`idPerfil`)VALUES("1015444310","blackshark","blackshark@ucentral.false.com","blackshark",20150601,"blackshark",1);
 COMMIT;
 
 
