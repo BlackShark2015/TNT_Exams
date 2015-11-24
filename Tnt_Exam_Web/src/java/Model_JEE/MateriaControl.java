@@ -5,22 +5,17 @@ import Controller.Conectadb;
 import Model.Materia;
 import View.frm_NewMateria;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean
-@RequestScoped
 public class MateriaControl 
 {
-    String Materia;
-    String Respuesta;
-    
+    public String Materia;
+    public String Respuesta;
+
     public String getRespuesta() {
         return Respuesta;
     }
@@ -63,28 +58,6 @@ public class MateriaControl
             setRespuesta("Catch");
         }
         //return insert;
-    }
-    
-    public void ObtenerMateriass() throws IOException
-    {
-        
-        Conectadb Con = new Conectadb();
-        
-        ResultSet rsMateria = null;
-        List<String> materi = null;
-        try {
-            if (Con.conectar()) {
-                rsMateria = Con.consulta("select * from Materias");
-                rsMateria.next();
-                materi.addAll((Collection<? extends String>) rsMateria);
-                if(rsMateria.getRow() > 0)
-                    
-                    //return materi;
-                Con.cierraConexion();
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
 }

@@ -9,8 +9,6 @@ import View.frm_NewMateria;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +20,8 @@ import java.util.logging.Logger;
 public final class MateriaController {
     private Conectadb Con;
     private Materia mat;
+    
+    
     /**
      * 
      * @throws IOException 
@@ -49,7 +49,7 @@ public final class MateriaController {
     public int CrearMaterial(String Nombre){
         mat.setNombre(Nombre);
         int insert =0;
-        String Query = "Insert Into blackshark.Materias(Nombre)" +
+        String Query = "Insert Into tnt_exam.Materias(Nombre)" +
                        "values ('"+ mat.getNombre() +"')";
         try {
             if (this.Con.conectar()) {
@@ -103,43 +103,5 @@ public final class MateriaController {
             Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (int) rsMateria.getObject("IdMateria");
-    }
-        
-        public List<String> ObtenerMaterias(){
-        ResultSet rsMateria = null;
-        List<String> materi = null;
-        try {
-            if (this.Con.conectar()) {
-                rsMateria = Con.consulta("select * from Materias");
-                rsMateria.next();
-                materi.addAll((Collection<? extends String>) rsMateria);
-                if(rsMateria.getRow() > 0)
-                    
-                    return materi;
-                Con.cierraConexion();
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return materi;
-    }
-        
-        public void ObtenerMateriass(){
-        ResultSet rsMateria = null;
-        List<String> materi = null;
-        try {
-            if (this.Con.conectar()) {
-                rsMateria = Con.consulta("select * from Materias");
-                rsMateria.next();
-                materi.addAll((Collection<? extends String>) rsMateria);
-                if(rsMateria.getRow() > 0)
-                    
-                    //return materi;
-                Con.cierraConexion();
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //return materi;
     }
 }

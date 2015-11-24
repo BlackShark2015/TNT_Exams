@@ -46,18 +46,18 @@ public class Conectadb
     //Constructor que crea la conexion sin parametros con unos definidos en la clase
     //(meter los datos correspondientes)
     public Conectadb() throws FileNotFoundException, IOException {
-        Properties propiedades = new Properties();
-        InputStream entrada = null;
+        //Properties propiedades = new Properties();
+        //InputStream entrada = null;
         
-        entrada = new FileInputStream("configuracion.properties");
+        //entrada = new FileInputStream("configuracion.properties");
 
         // cargamos el archivo de propiedades
-        propiedades.load(entrada);
+        //propiedades.load(entrada);
 
         // obtenemos las propiedades y las asignamos a sus respectivas variables
-        this.usuario = propiedades.getProperty("Usuario");
-        this.clave = propiedades.getProperty("Clave");
-        this.url = "jdbc:mysql://localhost:3306/" + propiedades.getProperty("DataBase");
+        this.usuario = "blackshark";//propiedades.getProperty("Usuario");
+        this.clave = "blackshark";//propiedades.getProperty("Clave");
+        this.url = "jdbc:mysql://localhost:3306/blackshark";// + propiedades.getProperty("DataBase");
         this.driverClassName = "com.mysql.jdbc.Driver";
     }
  

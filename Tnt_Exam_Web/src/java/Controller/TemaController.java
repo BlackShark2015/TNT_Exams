@@ -50,7 +50,7 @@ public class TemaController {
         tem.setIdMateria(idMateria);
         
         int insert =0;
-        String Query = "Insert Into blackshark.Temas(Nombre, Materias_idMateria)" +
+        String Query = "Insert Into tnt_exam.Temas(Nombre, Materias_idMateria)" +
                        "values ('"+ tem.getNombre() + "'," + tem.getIdMateria() + ")";
         try {
             if (this.Con.conectar()) {

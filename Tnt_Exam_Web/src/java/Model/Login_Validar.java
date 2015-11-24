@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
 public class Login_Validar 
 {
     private String usuario;
-    private char[] contraseña;
+    private String contrasena;
     private String mensaje;
     /**
      * Creates a new instance of Login_Validar
@@ -47,12 +48,12 @@ public class Login_Validar
         this.usuario = usuario;
     }
 
-    public char[] getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(char[] contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getMensaje() {
@@ -63,19 +64,18 @@ public class Login_Validar
         this.mensaje = mensaje;
     }
 
-
-    
-    public  String validar() {                                         
+ 
+    public  String validar() throws IOException {                                         
         try {
-            
+            Con = new Conectadb();
 
             char[] vac = {};
             String user = getUsuario();
-            char[] pass = getContraseña();
+            String pass = getContrasena();
             if (user.equals("")) {
                 //JOptionPane.showMessageDialog(null, "Usuario invalido.", "Campos nulos", 0);
                 mensaje="Usuario invalido.";
-            } else if (Arrays.equals(pass, vac)) {
+            } else if (pass.equals("")) {
                 //JOptionPane.showMessageDialog(null, "Contraseña invalida.", "Campos nulos", 0);
                 mensaje="Contraseña Invalida.";
             } else if (this.Con.conectar()) {
@@ -83,14 +83,14 @@ public class Login_Validar
                 rsIdentificar.next();
                 String name = rsIdentificar.getString("UserName");
                 String passw = rsIdentificar.getString("Password");
-                char[] convertpast = new char[passw.length()];
+                /*char[] convertpast = new char[passw.length()];
                 for (int i = 0; i < passw.length(); i++) {
                     convertpast[i] = passw.charAt(i);
-                }
-                if (Arrays.equals(getContraseña(), convertpast) && user.toUpperCase().equals(name.toUpperCase())) {
+                }*/
+                if (passw.equals(getContrasena()) && user.toUpperCase().equals(name.toUpperCase())) {
                     //JOptionPane.showMessageDialog(null, "Binvenido " + name);
                     mensaje="Bienvenido";
-                    
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
                 } else {
                     //JOptionPane.showMessageDialog(null, "verifique los datos proporsionados");
                     mensaje="Verifique los datos proprocionados";
