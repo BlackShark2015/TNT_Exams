@@ -3,26 +3,76 @@
  */
 package Model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import Controller.Conectadb;
 import Model.Materia;
 import View.frm_NewMateria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.SelectItem;
+import javax.naming.NamingException;
 
 @ManagedBean
 @RequestScoped
-
 public class Materia implements Util {
 
+    private Conectadb Con;
+    
+    private static final long serialVersionUID = 1L;
+    private List<SelectItem> items = new ArrayList <SelectItem>();
+    private Long id;
+
+    ArrayList arrayList = new ArrayList();
     private int IdMateria;
     private String Nombre;
+    
+    public SelectItem[] getValues()
+    {
+        return arrayListToSelectItem(arrayList);
+    }
+    
+    public SelectItem[] arrayListToSelectItem(ArrayList arrayList)
+    {
+        SelectItem[] result = new SelectItem[arrayList.size()];
+         arrayList.toArray(result);
+         return result;
+    }
+    
+    public ArrayList getNames() throws SQLException, NamingException, IOException {
+
+        ArrayList arrayList = new ArrayList();
+        this.Con = new Conectadb();
+        
+        ResultSet rsMateria = null;
+        try {
+            if (this.Con.conectar()) {
+                rsMateria = Con.consulta("select * from materias");
+                
+                if(rsMateria.getRow() > 0)
+                   
+                while (rsMateria.next()) {
+                    arrayList.add(new SelectItem(rsMateria.getString(1)));
+                }
+                
+                Con.cierraConexion();
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayList;
+    }
+    
     
     @Override
     public ArrayList crear(ArrayList item) {
@@ -84,6 +134,8 @@ public class Materia implements Util {
         }
         //return insert;
         return retorno;
-    }    
+    }  
+    
+
     
 }

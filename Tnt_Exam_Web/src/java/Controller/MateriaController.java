@@ -11,12 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author julio morales,Johan Garcia
  */
 
+@ManagedBean
+@RequestScoped
 public final class MateriaController {
     private Conectadb Con;
     private Materia mat;

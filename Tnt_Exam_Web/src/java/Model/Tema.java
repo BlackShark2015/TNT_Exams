@@ -2,13 +2,16 @@ package Model;
 
 
 import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  * 
  * @author Julio Morales, Johan Garcia
  * clase que describe un tema al cual pertenece una pregunta
  */
-
+@ManagedBean
+@RequestScoped
 public class Tema implements Util {
 
     private int IdTema;

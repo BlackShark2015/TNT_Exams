@@ -55,8 +55,8 @@ public class Conectadb
         //propiedades.load(entrada);
 
         // obtenemos las propiedades y las asignamos a sus respectivas variables
-        this.usuario = "blackshark";//propiedades.getProperty("Usuario");
-        this.clave = "blackshark";//propiedades.getProperty("Clave");
+        this.usuario = "root";//propiedades.getProperty("Usuario");
+        this.clave = "root";//propiedades.getProperty("Clave");
         this.url = "jdbc:mysql://localhost:3306/blackshark";// + propiedades.getProperty("DataBase");
         this.driverClassName = "com.mysql.jdbc.Driver";
     }
