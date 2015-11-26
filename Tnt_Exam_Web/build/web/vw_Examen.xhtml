@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+        <title>Black Shark - Examen</title>
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </h:head>
+    <h:body>
+        <script src="js/jquery-2.1.4.js" ></script>
+        <script src="js/bootstrap.js" ></script>
+        
+        <h:form>
+        <div class="container">
+            <div>
+                    <img src="imagenes/shark.png" alt="Black Shark" height="200px" width="200px"></img>    
+                </div>
+                <br></br>
+                <div class="navbar col-md-4">
+                   <div class="container"> 
+                      <ul class="nav">
+                       <li class="active"><a href="index.xhtml">Home</a></li>
+                       <li><a href="vw_Materia.xhtml">Materia</a></li>
+                       <li><a href="vw_Tema.xhtml">Tema</a></li>
+                       <li><a href="*">Pregunta</a></li>
+                       <li><a href="*">Respuesta</a></li>
+                       <li><a href="vw_Examen.xhtml">Examen</a></li>                       
+                   </ul>
+                   </div>
+                </div>
+                
+                <div class="navbar col-md-8">
+                    <div>
+                        Seleccione Materia
+                        <h:selectOneMenu class="input-sm" value="#{Examen.materia}">
+                            <f:selectItems value="#{Examen.materia}" />   							
+                         </h:selectOneMenu>
+                    </div>                    
+                    <div>
+                        Seleccione Tipo preguntas:
+                        <h:selectOneMenu id="som-Pregunta" class="input-sm" value="#{Examen.TipoPregunta}">
+                            <f:selectItems value="#{Examen.TipoPregunta}" />   							
+                         </h:selectOneMenu>
+                    </div>  
+                    <div>
+                        Seleccione Dificultad preguntas:
+                        <h:selectOneMenu id="som-Pregunta" class="input-sm" value="#{Examen.DificultadPregunta}">
+                            <f:selectItems value="#{Examen.DificultadPregunta}" />   							
+                         </h:selectOneMenu>
+                    </div> 
+                    <div class="navbar col-md-12">
+                        Cantidad preguntas: 
+                    <h:inputText id="txt_CantPregunta" class="input-sm" value="#{Examen.CantidadPregunta}"></h:inputText>  
+                    </div>
+                    <div class="navbar col-md-12">                    
+                        <h:commandButton 
+                        id="btn_Add" 
+                        value="Agregar" 
+                        onclick="return AgreagarElementos('#{Examen.AddPrametros()}')"/>
+                    </div>
+                    <div class="navbar col-md-12">
+                        
+                        <h:dataTable id="tbPreguntas" class="table-responsive" var="Preguntas" > <!--values="#{Examen.Listado}"-->
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Materia" />
+                                </f:facet>
+                                <h:outputLabel>#{elemento.materia}</h:outputLabel>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Tipo Preg." />
+                                </f:facet>
+                                <h:outputLabel>#{elemento.TipPreg}</h:outputLabel>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Dificultad" />
+                                </f:facet>
+                                <h:outputLabel>#{elemento.Dificultad}</h:outputLabel>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="Cantidad Preg." />
+                                </f:facet>
+                                <h:outputLabel>#{elemento.Cantidad}</h:outputLabel>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                    
+                    <div class="navbar col-md-12">                    
+                        <h:commandButton 
+                        id="btn_Generar" 
+                        value="Generar Examen" 
+                        onclick="return AgreagarElementos('#{Examen.Generar()}')"/>
+                    </div>
+                    
+                </div>
+                
+        </div>
+            
+        </h:form>
+         
+    </h:body>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btnExportarPng").button();
+            tableToGrid(".tbPreguntas", {
+            datatype: 'local',
+            rownumbers: true,
+            height: 'auto',
+            userdata: "userdata",
+            width: 'auto',
+            rowNum: 15,
+            rowList: [5, 10, 15],
+            viewrecords: true,
+            pager: '#tbDatosPager',
+            recordtext: "{0} {1}/{2}",
+            sortable: false,
+            colNames: ['Materia', 'TipoPreg', 'Dificultad', 'Cant'],
+            colModel: [
+            {name: "Materia", index: "Materia", width: "200"},
+            {name: "TipoPreg", index: "TipoPreg", align: "center", width: "80"},
+            {name: "Dificultad", index: "Dificultad", align: "center", width: "120"},
+            {name: "Cant", index: "Cant", align: "center", width: "80"}
+            ],
+            gridview: true,
+            onSortCol: function(index, iCol, sortorder) {
+            console.log(index, iCol, sortorder);
+            var datos = $(".tbPreguntas").jqGrid("getGridParam", "data");
+            if (sortorder === "asc") {
+            if (index === "Materia") {
+            datos.sort(function(a, b) {
+            var aa = parseInt(decodificaHtml(a[index]));
+            var bb = parseInt(decodificaHtml(b[index]));
+            return  aa - bb;
+            });
+            } else {
+            datos.sort(function(a, b) {
+            var aa = decodificaHtml(a[index]);
+            var bb = decodificaHtml(b[index]);
+            return  aa.localeCompare(bb);
+            });
+            }
+            } else if (sortorder === "desc") {
+            if (index === "Materia") {
+            datos.sort(function(a, b) {
+            var aa = parseInt(decodificaHtml(a[index]));
+            var bb = parseInt(decodificaHtml(b[index]));
+            return  bb - aa;
+            });
+            } else {
+            datos.sort(function(a, b) {
+            var aa = decodificaHtml(a[index]);
+            var bb = decodificaHtml(b[index]);
+            return  bb.localeCompare(aa);
+            });
+            }
+            }
+            console.log(datos);
+            dibujaEdades(datos);
+            },
+            onSelectRow: function(rowid, status, e) {
+            console.log(rowid);
+            },
+            loadComplete: function(data) {
+            console.log("Tabla Cargada");
+            }
+            });
+
+        function AgreagarElementos(alerta)
+        {
+            
+        }
+    </script>
+    
+</html>
