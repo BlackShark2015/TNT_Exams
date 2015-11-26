@@ -5,13 +5,21 @@
 package Model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.model.SelectItem;
 /**
  * 
  * @author Familia
  */
+@ManagedBean
+@RequestScoped
 public class Examen extends UtilExamen {
 
+    public List<SelectItem> Lsitado = new ArrayList <SelectItem>();
     private String nombre;
 
     public int cantidadPreguntas;
