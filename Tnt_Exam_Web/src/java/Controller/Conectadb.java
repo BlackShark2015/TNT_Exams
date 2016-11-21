@@ -55,10 +55,12 @@ public class Conectadb
         //propiedades.load(entrada);
 
         // obtenemos las propiedades y las asignamos a sus respectivas variables
-        this.usuario = "root";//propiedades.getProperty("Usuario");
-        this.clave = "";//propiedades.getProperty("Clave");
-        this.url = "jdbc:mysql://localhost:3306/blackshark";// + propiedades.getProperty("DataBase");
+        this.usuario = "supervisor";//propiedades.getProperty("Usuario");
+        this.clave = "1q2w3e4r";//propiedades.getProperty("Clave");
+        this.url = "jdbc:mysql://190.144.114.141:3306/blackshark";// + propiedades.getProperty("DataBase");
+        //this.url = "jdbc:postgresql://localhost:5432/blackshark";// + propiedades.getProperty("DataBase");
         this.driverClassName = "com.mysql.jdbc.Driver";
+        //this.driverClassName = "org.postgresql.Driver";
     }
  
     //metodos para recuperar los datos de conexion
