@@ -19,32 +19,53 @@ and open the template in the editor.
     <h:body>
         <script src="js/jquery-2.1.4.js" ></script>
         <script src="js/bootstrap.js" ></script>
-        <h:form>
-            
-        <div class="form-group">
-            <label for="userLog">Usuario</label>
-            <h:inputText class="form-control" id="userLog" value="#{login_Validar.usuario}"/>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <h:inputSecret id="txtPassword" class="form-control" value="#{login_Validar.contrasena}" autocomplete="off" />
-        </div>
-                <h:commandButton type="submit" class="btn btn-default" value="Enviar" action="#{login_Validar.validar()}"  />
-        </h:form>
         
-        <!-- <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Menu 
-        <span class="caret"></span></button>
-    
-            <ul class="dropdown-menu">
-                <li><a href="index.xhtml">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div> -->
-            <h2>
-                <samp>#{login_Validar.mensaje}</samp>
-            </h2>
-        <img src="imagenes/shark.png" alt="Black Shark" height="242" width="242"></img>
+        <div class="container">
+            <div class="row"><br/></div>
+            <div class="row">
+                <div class="col-md-4"> </div>
+                <div class="col-md-4"><img src="imagenes/shark.png" alt="Black Shark" height="242" width="242"></img></div>
+                <div class="col-md-4"> </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"> </div>
+                
+                <div class="col-md-4">
+
+                    <h:form>
+
+                        <div class="form-group">
+                            <label for="userLog">Usuario</label>
+                            <h:inputText class="form-control" id="userLog" value="#{login_Validar.usuario}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <h:inputSecret id="txtPassword" class="form-control" value="#{login_Validar.contrasena}" autocomplete="off" />
+                        </div>
+                        <h:commandButton type="submit" class="btn btn-default" value="Enviar" action="#{login_Validar.validar()}"  />
+                    </h:form>
+
+                </div>
+                <div class="col-md-4"> </div>
+            </div>
+
+            <!-- <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Menu 
+            <span class="caret"></span></button>
+        
+                <ul class="dropdown-menu">
+                    <li><a href="index.xhtml">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                </ul>
+            </div> -->
+            
+            <div class="row">
+                <div class="col-md-4"> </div>
+                <div class="col-md-4"><h4><samp>#{login_Validar.mensaje}</samp></h4></div>
+                <div class="col-md-4"> </div>
+            </div>
+        </div>
+        
     </h:body>
 </html>

@@ -7,41 +7,55 @@
         <title>Black Shark - Materias</title>
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    </h:head>
-    <h:body>
         <script src="js/jquery-2.1.4.js" ></script>
         <script src="js/bootstrap.js" ></script>
+    </h:head>
+    <h:body>
         
-        <h:form>
-            <div class="container">
-                <div>
-                    <img src="imagenes/shark.png" alt="Black Shark" height="200px" width="200px"></img>    
+        
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.xhtml">TNT Exams</a>
                 </div>
-                <br></br>
-                <div class="navbar col-md-4">
-                   <div class="container"> 
-                      <ul class="nav">
-                       <li class="active"><a href="index.xhtml">Home</a></li>
-                       <li><a href="vw_Materia.xhtml">Materia</a></li>
-                       <li><a href="vw_Tema.xhtml">Tema</a></li>
-                       <li><a href="*">Pregunta</a></li>
-                       <li><a href="*">Respuesta</a></li>
-                       <li><a href="vw_Examen.xhtml">Examen</a></li> 
-                   </ul>
-                   </div>
-                </div>
-                <div class="navbar col-md-8">
-                    Materia a crear: 
-                    <h:inputText id="txt_materia" class="input-sm" value="#{materia.nombre}"></h:inputText>
-                    <br></br>
-                    <h:commandButton 
-                        id="btn_materia" 
-                        value="Guardar" 
-                        action="#{materia.CrearMateria()}" 
-                        onclick="return confrim('#{materia.CrearMateria()}')"/>
-                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="vw_Materia.xhtml">Materia</a></li>
+                    <li><a href="vw_Tema.xhtml">Tema</a></li>
+                    <li><a href="*">Pregunta</a></li>
+                    <li><a href="*">Respuesta</a></li>
+                    <li><a href="vw_Examen.xhtml">Examen</a></li>      
+                </ul>
             </div>
-        </h:form>
+        </div>
+        
+        <div class="container">
+            <div class="col-md-3"> </div>
+            <div class="col-md-3"><img src="imagenes/shark.png" alt="Black Shark" height="200px" width="200px"></img> </div>
+            <div class="col-md-3">
+                <h:form>
+                    <div>
+                        Materia a crear: 
+                        <h:inputText id="txt_materia" class="input-sm" value="#{materia.nombre}"></h:inputText>
+                        <br></br>
+                        <h:commandButton 
+                            id="btn_materia" 
+                            value="Guardar" 
+                            onclick="return confrim('#{materia.CrearMateria()}')"/>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-md-3"> </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <br/><br/>
+                <footer class="footer">
+                    <div class="container">
+                        <p class="text-muted">Creado por Johan García - Alejandra Diaz - Julián Gómez &copy;</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
     </h:body>
     
     <script type="text/javascript">

@@ -37,15 +37,22 @@ public class Materia implements Util {
     private int IdMateria;
     private String Nombre;
     
-    public SelectItem[] getValues()
+    public SelectItem[] getValues() throws SQLException, IOException, NamingException
     {
+        arrayList = getNames();
+        return arrayListToSelectItem(arrayList);
+    }
+    
+    public SelectItem[] getValues2() throws SQLException, IOException, NamingException
+    {
+        arrayList = getData();
         return arrayListToSelectItem(arrayList);
     }
     
     public SelectItem[] arrayListToSelectItem(ArrayList arrayList)
     {
         SelectItem[] result = new SelectItem[arrayList.size()];
-         arrayList.toArray(result);
+         this.arrayList.toArray(result);
          return result;
     }
     
@@ -59,7 +66,32 @@ public class Materia implements Util {
             if (this.Con.conectar()) {
                 rsMateria = Con.consulta("select * from materias");
                 
-                if(rsMateria.getRow() > 0)
+                //if(rsMateria.getRow() > 0)
+                   
+                while (rsMateria.next()) {
+                    arrayList.add(new SelectItem(rsMateria.getString(2)));
+                }
+                
+                Con.cierraConexion();
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_NewMateria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayList;
+    }
+    
+        public ArrayList getData() throws SQLException, NamingException, IOException {
+
+        ArrayList arrayList = new ArrayList();
+        this.Con = new Conectadb();
+        
+        ResultSet rsMateria = null;
+        try {
+            if (this.Con.conectar()) {
+                rsMateria = Con.consulta("select concat(idMateria,\" \",Nombre) from materias \n" +
+"where Nombre <>\"null\"");
+                
+                //if(rsMateria.getRow() > 0)
                    
                 while (rsMateria.next()) {
                     arrayList.add(new SelectItem(rsMateria.getString(1)));
@@ -72,7 +104,6 @@ public class Materia implements Util {
         }
         return arrayList;
     }
-    
     
     @Override
     public ArrayList crear(ArrayList item) {
