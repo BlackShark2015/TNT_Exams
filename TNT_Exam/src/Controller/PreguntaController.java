@@ -45,7 +45,7 @@ public class PreguntaController {
         Pregunta preg = new Pregunta();
         preg = item;
         System.out.println(item.getIdPregunta()+" -- "+item.getPregunta() );
-        String Query =  "INSERT INTO tnt_exam.preguntas" +
+        String Query =  "INSERT INTO preguntas" +
                 "(Pregunta" +
                 ",Temas_idTema" +
                 ",Temas_Materias_idMateria" +

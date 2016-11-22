@@ -47,7 +47,7 @@ public final class MateriaController {
     public int CrearMaterial(String Nombre){
         mat.setNombre(Nombre);
         int insert =0;
-        String Query = "Insert Into tnt_exam.Materias(Nombre)" +
+        String Query = "Insert Into Materias(Nombre)" +
                        "values ('"+ mat.getNombre() +"')";
         try {
             if (this.Con.conectar()) {

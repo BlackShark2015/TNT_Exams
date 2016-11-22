@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jcmorales,jgarciac3
  */
 public class TemaController {
     private Conectadb Con;
@@ -50,7 +49,7 @@ public class TemaController {
         tem.setIdMateria(idMateria);
         
         int insert =0;
-        String Query = "Insert Into tnt_exam.Temas(Nombre, Materias_idMateria)" +
+        String Query = "Insert Into Temas(Nombre, Materias_idMateria)" +
                        "values ('"+ tem.getNombre() + "'," + tem.getIdMateria() + ")";
         try {
             if (this.Con.conectar()) {
@@ -85,7 +84,7 @@ public class TemaController {
         return rsTema;
     }
     public int ObtenerTema(String Tema) throws SQLException{
-        ResultSet rsTema = null;
+        ResultSet rsTema;
         try {
             if (this.Con.conectar()) {
                 rsTema = Con.consulta("select * from Temas where Nombre = '" + Tema + "'");
